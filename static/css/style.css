@@ -1,0 +1,17 @@
+body{
+  background-color: lightgray;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 700px 400px 400px;
+  grid-template-rows: 300px 300px 300px;
+  padding: 10px;
+  background-color: lightgray;
+  grid-gap: 20px;
+}
+.grid-item {
+  border: 1px solid white;
+  box-shadow: 2px 2px grey;
+  padding: 8px;
+  font-size: 18px;
+}
