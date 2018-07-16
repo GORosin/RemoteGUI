@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MainWindow</title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+
+   <script src="static/js/jquery-1.9.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<script>
+        $(function() {
+            $('button').click(function() {
+                $.ajax({
+                    url: '/temp',
+                    data: $('form').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+        function noReload(){
+            if(event.key == 'Enter'){
+                event.preventDefault();
+				document.myform.submit();
+			}
+        }
+        function addFields1(){
+            if(event.key != 'Enter'){
+				return;
+			}
+			event.preventDefault();
+            var number = document.getElementById("member").value;
+            if(number > 3){
+                number = 3;
+            }
+            var container = document.getElementById("container");
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+			for (i=0;i<number;i++){
+                container.appendChild(document.createTextNode("Channel " + (i+1)));
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "channel "+(i+1);
+                input.value = "";
+                container.appendChild(input);
+                container.appendChild(document.createElement("br"));
+            }
+        }
+		function addFields2(){
+		    if(event.key != 'Enter'){
+				return;
+			}
+			event.preventDefault();
+            var number = document.getElementById("member2").value;
+            if(number > 3){
+                number = 3;
+            }
+            var container = document.getElementById("container2");
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+			for (i=0;i<number;i++){
+                container.appendChild(document.createTextNode("Channel " + (i+1)));
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "channel "+(i+1);
+                input.value = "";
+                container.appendChild(input);
+                container.appendChild(document.createElement("br"));
+            }
+        }
+</script>
+<style>
+body{
+  background-color: lightgray;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 700px 400px 400px;
+  grid-template-rows: 300px 300px 300px;
+  padding: 10px;
+  background-color: lightgray;
+  grid-gap: 20px;
+}
+.grid-item {
+  border: 1px solid white;
+  box-shadow: 2px 2px grey;
+  padding: 8px;
+  font-size: 18px;
+}
+</style>
+<body>
+<div class="grid-container">
+    <form id = "myform" method="post" role="form">
+    <div class="grid-item">
+        Low Voltage<br>
+            <input type = "radio" name="low" value="on"> On<br>
+            <input type = "radio" name="low" value="off"> Off<br>
+            <input type = "submit" name = "read back" value = "Read Back"><br>
+            <input type="text" id="member" value="1" onkeydown = "addFields1()"> Channel <br />
+                <div id="container"></div>
+    </div>
+    <div class="grid-item">
+            High Voltage<br>
+            <input type = "radio" name="high" value="on"> On<br>
+            <input type = "radio" name="high" value="off"> Off<br>
+            <input type = "submit" name = "read back" value = "Read Back">
+            <input type = "submit" name = "IV scan" value = "Run I-V Scan"><br>
+            <input type="text" id="member2" value="1" onkeydown = "addFields2()"> Channel <br />
+                <div id="container2"></div>
+    </div>
+    <div class="grid-item">
+        Chiller<br>
+        <input type="text" name = "temperature" value=""> <br>
+        <button type="button">Set Temperature</button>
+    </div>
+    <div class="grid-item">
+            <input type = "text" name = "IP" value = ""><button type="button">Set Ping</button><br>
+            <input type = "submit" value = "Break" onclick="noReload()"><br>
+            Sensor Data: <br/>
+            <input type = "radio" name = "sensor" value="on"> On<br>
+            <input type = "radio" name = "sensor" value="off"> Off<br>
+    </div>
+    <div class="grid-item">
+        ITSDAQ<br>
+        Temperature for Test<br>
+        <input type="text" name = "test" value = ""><br/>
+        <input type = "submit" value = "Run Confirmation Test"><br>
+        Status<br>
+    </div>
+    <div class="grid-item">
+            Interlock Settings<br>
+            SHT Temp Limits<br/>
+            <input type="text" name = "temp before" value = ""> to <input type="text" name = "temp after" value = ""><br/>
+            SHT Humidity Limits<br/>
+            <input type="text" name = "humidity before" value = ""> to <input type="text" name = "humidity after" value = ""><br/>
+            Hybrid NTC Limits<br>
+            <input type="text" name = "hybrid before" value = ""> to <input type="text" name = "hybrid after" value = ""><br/>
+            User NTC Limits<br>
+            <input type="text" name = "user before" value = ""> to <input type="text" name = "user after" value = ""><br/>
+            <input type = "submit" value = "Set Interlock"><br>
+    </div>
+    </form>
+</div>
+</body>
+</html>
