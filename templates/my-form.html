@@ -54,6 +54,71 @@
                 }
             });
         });
+        $(document.getElementById("read back high")).click(function() {
+            $.ajax({
+                url: '/high',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("IV scan")).click(function() {
+            $.ajax({
+                url: '/IVscan',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("Sensor")).click(function() {
+            $.ajax({
+                url: '/sensor',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("Run Confirmation Test")).click(function() {
+            $.ajax({
+                url: '/confirmtest',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("Set Interlock")).click(function() {
+            $.ajax({
+                url: '/interlock',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
     });
 </script>
 <body>
@@ -84,16 +149,17 @@
     <div class="grid-item">
             <input type = "text" name = "IP" value = "">
             <button type="button" id = "SetPing">Set Ping</button><br>
-            <input type = "submit" value = "Break" onclick="noReload()"><br>
+            <button type = "button" id = "Break">Break</button><br>
             Sensor Data: <br/>
             <input type = "radio" name = "sensor" value="on"> On<br>
             <input type = "radio" name = "sensor" value="off"> Off<br>
+            <button type = "button" id = "Sensor">Read Back</button><br>
     </div>
     <div class="grid-item">
         ITSDAQ<br>
         Temperature for Test<br>
         <input type="text" name = "test" value = ""><br/>
-        <input type = "submit" value = "Run Confirmation Test"><br>
+        <button type = "button" id = "Run Confirmation Test">Run Confirmation Test</button><br>
         Status<br>
     </div>
     <div class="grid-item">
@@ -106,7 +172,7 @@
             <input type="text" name = "hybrid before" value = ""> to <input type="text" name = "hybrid after" value = ""><br/>
             User NTC Limits<br>
             <input type="text" name = "user before" value = ""> to <input type="text" name = "user after" value = ""><br/>
-            <input type = "submit" value = "Set Interlock"><br>
+            <button type = "button" id = "Set Interlock">Set Interlock</button><br>
     </div>
     </form>
 </div>
