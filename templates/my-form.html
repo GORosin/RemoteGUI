@@ -13,6 +13,49 @@
     <script src="static/js/myscript.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+<script>
+    $(function() {
+        $(document.getElementById("SetTemp")).click(function() {
+            $.ajax({
+                url: '/temp',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("SetPing")).click(function() {
+            $.ajax({
+                url: '/ping',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("read back low")).click(function() {
+            $.ajax({
+                url: '/low',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
 <body>
 <div class="grid-container">
     <form id = "myform" method="post" role="form">
@@ -20,7 +63,7 @@
         Low Voltage<br>
             <input type = "radio" name="low" value="on"> On<br>
             <input type = "radio" name="low" value="off"> Off<br>
-            <input type = "submit" name = "read back" value = "Read Back"><br>
+            <button type = "button" id = "read back low">Read Back</button><br>
             <input type="text" id="member" value="1" onkeydown = "addFields1()"> Channel <br />
                 <div id="container"></div>
     </div>
@@ -28,18 +71,19 @@
             High Voltage<br>
             <input type = "radio" name="high" value="on"> On<br>
             <input type = "radio" name="high" value="off"> Off<br>
-            <input type = "submit" name = "read back" value = "Read Back">
-            <input type = "submit" name = "IV scan" value = "Run I-V Scan"><br>
+            <button type = "button" id = "read back high">Read Back</button><br>
+            <button type = "button" id = "IV scan">Run IV Scan</button><br>
             <input type="text" id="member2" value="1" onkeydown = "addFields2()"> Channel <br />
                 <div id="container2"></div>
     </div>
     <div class="grid-item">
         Chiller<br>
         <input type="text" name = "temperature" value=""> <br>
-        <button type="button">Set Temperature</button>
+        <button type="button" id="SetTemp">Set Temperature</button>
     </div>
     <div class="grid-item">
-            <input type = "text" name = "IP" value = ""><button type="button">Set Ping</button><br>
+            <input type = "text" name = "IP" value = "">
+            <button type="button" id = "SetPing">Set Ping</button><br>
             <input type = "submit" value = "Break" onclick="noReload()"><br>
             Sensor Data: <br/>
             <input type = "radio" name = "sensor" value="on"> On<br>

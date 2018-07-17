@@ -1,18 +1,3 @@
- $(function() {
-	$('button').click(function() {
-		$.ajax({
-			url: '/temp',
-			data: $('form').serialize(),
-			type: 'POST',
-			success: function(response) {
-				console.log(response);
-			},
-			error: function(error) {
-				console.log(error);
-			}
-		});
-	});
-});
 function noReload(){
 	if(event.key == 'Enter'){
 		event.preventDefault();
@@ -35,10 +20,14 @@ function addFields1(){
 	for (i=0;i<number;i++){
 		container.appendChild(document.createTextNode("Channel " + (i+1)));
 		var input = document.createElement("input");
+		var button = document.createElement("button");
 		input.type = "text";
 		input.name = "channel "+(i+1);
 		input.value = "";
+		button.type = "button";
+		button.name = "Set Channel "+(i+1);
 		container.appendChild(input);
+		container.appendChild(button);
 		container.appendChild(document.createElement("br"));
 	}
 }

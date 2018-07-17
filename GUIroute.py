@@ -9,15 +9,22 @@ def my_form():
 @app.route('/temp', methods=['GET','POST'])
 def test_post():
     if request.method == 'POST':
-        result = request.form
+        result = request.form['temperature']
         print(result)
         return render_template('my-form.html')
 
 @app.route('/ping', methods=['GET','POST'])
 def ping():
-    ping = request.form['ping']
-    print(ping)
-    return render_template('my-form.html')
+    if request.method == 'POST':
+        ping = request.form['IP']
+        print(ping)
+        return render_template('my-form.html')
+
+@app.route('/break', methods=['GET','POST'])
+def breakConnection():
+    pass
+
+
 
 if __name__ == "__main__":
     app.run(host = '127.0.0.1',port = 8080,debug=True)
