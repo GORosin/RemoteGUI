@@ -15,6 +15,32 @@
 </head>
 <script>
     $(function() {
+        $(document.getElementById("read back low")).click(function() {
+            $.ajax({
+                url: '/low',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $(document.getElementById("read back high")).click(function() {
+            $.ajax({
+                url: '/high',
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
         $(document.getElementById("SetTemp")).click(function() {
             $.ajax({
                 url: '/temp',
@@ -41,22 +67,9 @@
                 }
             });
         });
-        $(document.getElementById("read back low")).click(function() {
+        $(document.getElementById("Break")).click(function() {
             $.ajax({
-                url: '/low',
-                data: $('form').serialize(),
-                type: 'POST',
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-        $(document.getElementById("read back high")).click(function() {
-            $.ajax({
-                url: '/high',
+                url: '/break',
                 data: $('form').serialize(),
                 type: 'POST',
                 success: function(response) {
