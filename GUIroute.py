@@ -25,7 +25,8 @@ def high_voltage():
 
 @app.route('/IVscan', methods=['GET','POST'])
 def iv_scan():
-    pass
+    ColdJig.SendServerMessage("do iv curve")
+    return render_template('my-form.html')
 
 @app.route('/temp', methods=['GET','POST'])
 def temp():
@@ -53,6 +54,7 @@ def sensor_data():
 def break_connection():
     ColdJig.SendServerMessage("break")
     ITSDAQ.SendServerMessage("break")
+    return render_template('my-form.html')
 
 @app.route('/confirmtest', methods=['GET','POST'])
 def confirmation_test():
