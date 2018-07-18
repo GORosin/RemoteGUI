@@ -8,12 +8,13 @@ from zmq_client import Client
 def my_form():
     return render_template('my-form.html')
 
-
 @app.route('/low', methods=['GET','POST'])
 def low_voltage():
     if request.method == 'POST':
         result = request.form['low']
         print(result)
+        ColdJig.SendServerMessage("lowV,turn,"+result)
+        ServerReply.setText(reply)
         return render_template('my-form.html')
 
 @app.route('/high', methods=['GET','POST'])
@@ -21,6 +22,8 @@ def high_voltage():
     if request.method == 'POST':
         result = request.form['high']
         print(result)
+        ColdJig.SendServerMessage("highV,turn,"+result)
+        ServerReply.setText(reply)
         return render_template('my-form.html')
 
 @app.route('/IVscan', methods=['GET','POST'])
@@ -29,10 +32,15 @@ def iv_scan():
     return render_template('my-form.html')
 
 @app.route('/temp', methods=['GET','POST'])
-def temp():
+def temperature():
     if request.method == 'POST':
-        result = request.form['temperature']
-        print(result)
+        temp = request.form['temperature']
+        print(temp)
+        message = "chiller,set,temperature at " + temp #there was a typo here: temprature
+        #print("sending message: " + message)
+        reply = ColdJig.SendServerMessage(message)
+        #print(reply)
+        ServerReply.setText(reply)
         return render_template('my-form.html')
 
 @app.route('/ping', methods=['GET','POST'])

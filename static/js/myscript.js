@@ -28,6 +28,7 @@ function addFields1(){
 		button.name = "Set Channel "+(i+1);
 		container.appendChild(input);
 		container.appendChild(button);
+		button.appendChild(document.createTextNode("Set Channel"));
 		container.appendChild(document.createElement("br"));
 	}
 }
