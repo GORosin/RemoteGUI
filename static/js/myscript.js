@@ -25,7 +25,7 @@ function addFields1(){
 		input.name = "channel "+(i+1);
 		input.value = "";
 		button.type = "button";
-		button.name = "Set Channel "+(i+1);
+		button.name = "Set High Channel "+(i+1);
 		container.appendChild(input);
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Channel"));
@@ -48,10 +48,15 @@ function addFields2(){
 	for (i=0;i<number;i++){
 		container.appendChild(document.createTextNode("Channel " + (i+1)));
 		var input = document.createElement("input");
+		var button = document.createElement("button");
 		input.type = "text";
 		input.name = "channel "+(i+1);
 		input.value = "";
+		button.type = "button";
+		button.name = "Set Low Channel "+(i+1);
 		container.appendChild(input);
+		container.appendChild(button);
+		button.appendChild(document.createTextNode("Set Channel"));
 		container.appendChild(document.createElement("br"));
 	}
 }
