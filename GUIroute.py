@@ -92,4 +92,4 @@ if __name__ == "__main__":
     ColdJig = Client("127.0.0.1", "5556")
     ITSDAQ = Client("127.0.0.1", "5555")
     Master = Client("127.0.0.1", "5554")
-    app.run(host = '127.0.0.1',port = 8080,debug=True)
+    app.run(host = '127.0.0.1',port = 5000,debug=True)

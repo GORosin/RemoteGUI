@@ -17,20 +17,20 @@
         <div class="grid-container">
             <div class="grid-item">
                 Low Voltage<br>
-                    <input type = "radio" name="low" value="on"> On<br>
-                    <input type = "radio" name="low" value="off"> Off<br>
-                    <button type = "button" id = "read back low">Read Back</button><br>
-                    <input type="text" id="member" value="1" onkeydown = "addFields1()"> Channel <br />
-                        <div id="container"></div>
+                <input type = "radio" name="low" value="on"> On<br>
+                <input type = "radio" name="low" value="off"> Off<br>
+                <button type = "button" id = "read back low">Read Back</button><br>
+                <input type="text" id="member" value="1" onkeydown = "addFields1()"> Channel(s) <br />
+                    <div id="container"></div>
             </div>
             <div class="grid-item">
-                    High Voltage<br>
-                    <input type = "radio" name="high" value="on"> On<br>
-                    <input type = "radio" name="high" value="off"> Off<br>
-                    <button type = "button" id = "read back high">Read Back</button><br>
-                    <button type = "button" id = "IV scan">Run IV Scan</button><br>
-                    <input type="text" id="member2" value="1" onkeydown = "addFields2()"> Channel <br />
-                        <div id="container2"></div>
+                High Voltage<br>
+                <input type = "radio" name="high" value="on"> On<br>
+                <input type = "radio" name="high" value="off"> Off<br>
+                <button type = "button" id = "read back high">Read Back</button><br>
+                <button type = "button" id = "IV scan">Run IV Scan</button><br>
+                <input type="text" id="member2" value="1" onkeydown = "addFields2()"> Channel(s) <br />
+                    <div id="container2"></div>
             </div>
             <div class="grid-item">
                 Chiller<br>
@@ -38,13 +38,14 @@
                 <button type="button" id="SetTemp">Set Temperature</button>
             </div>
             <div class="grid-item">
-                    <input type = "text" name = "IP" value = "">
-                    <button type="button" id = "SetPing">Set Ping</button><br>
-                    <button type = "button" id = "Break">Break</button><br>
-                    Sensor Data: <br/>
-                    <input type = "radio" name = "sensor" value="on"> On<br>
-                    <input type = "radio" name = "sensor" value="off"> Off<br>
-                    <button type = "button" id = "Sensor">Read Back</button><br>
+                Address<br/>
+                <input type = "text" name = "IP" value = "">
+                <button type="button" id = "SetPing">Ping</button><br>
+                <button type = "button" id = "Break">Break</button><br>
+                Sensor Data: <br/>
+                <input type = "radio" name = "sensor" value="on"> On<br>
+                <input type = "radio" name = "sensor" value="off"> Off<br>
+                <button type = "button" id = "Sensor">Read Back</button><br>
             </div>
             <div class="grid-item">
                 ITSDAQ<br>
@@ -54,16 +55,16 @@
                 Status<br>
             </div>
             <div class="grid-item">
-                    Interlock Settings<br>
-                    SHT Temp Limits<br/>
-                    <input type="text" name = "temp before" value = ""> to <input type="text" name = "temp after" value = ""><br/>
-                    SHT Humidity Limits<br/>
-                    <input type="text" name = "humidity before" value = ""> to <input type="text" name = "humidity after" value = ""><br/>
-                    Hybrid NTC Limits<br>
-                    <input type="text" name = "hybrid before" value = ""> to <input type="text" name = "hybrid after" value = ""><br/>
-                    User NTC Limits<br>
-                    <input type="text" name = "user before" value = ""> to <input type="text" name = "user after" value = ""><br/>
-                    <button type = "button" id = "Set Interlock">Set Interlock</button><br>
+                Interlock Settings<br>
+                SHT Temp Limits<br/>
+                <input type="text" name = "temp before" value = ""> to <input type="text" name = "temp after" value = ""><br/>
+                SHT Humidity Limits<br/>
+                <input type="text" name = "humidity before" value = ""> to <input type="text" name = "humidity after" value = ""><br/>
+                Hybrid NTC Limits<br>
+                <input type="text" name = "hybrid before" value = ""> to <input type="text" name = "hybrid after" value = ""><br/>
+                User NTC Limits<br>
+                <input type="text" name = "user before" value = ""> to <input type="text" name = "user after" value = ""><br/>
+                <button type = "button" id = "Set Interlock">Set Interlock</button><br>
             </div>
         </div>
     </form>
