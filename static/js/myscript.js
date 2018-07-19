@@ -236,6 +236,13 @@ function addFields1(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
+		$(document.getElementById(button.id)).click(function() {
+            $.ajax({
+                url: '/'+input.name,
+                data: $('form').serialize(),
+                type: 'POST'
+            });
+        });
 	}
 }
 function addFields2(){
@@ -264,5 +271,12 @@ function addFields2(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
+		$(document.getElementById(button.id)).click(function() {
+            $.ajax({
+                url: '/'+input.name,
+                data: $('form').serialize(),
+                type: 'POST'
+            });
+        });
 	}
 }
