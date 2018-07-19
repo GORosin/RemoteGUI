@@ -1,18 +1,92 @@
 $(function() {
-    $(document.getElementById("read back low")).click(function() {
+    $(document.getElementById("voltage low")).click(function() {
         $.ajax({
             url: '/low',
             data: $('form').serialize(),
-            type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            type: 'POST'
         });
     });
-    $(document.getElementById("read back high")).click(function() {
+//    $(document.getElementById("voltage low")).click(function() {
+//        var val = $(this).val();
+//            $.ajax({
+//                url: '/low',
+//                type: "POST",
+//                data:{
+//                    val
+//                }
+//            })
+//        })
+    $(document.getElementById("channel 1")).click(function() {
+        $.ajax({
+            url: '/channel1',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 2")).click(function() {
+        $.ajax({
+            url: '/channel2',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 3")).click(function() {
+        $.ajax({
+            url: '/channel3',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 4")).click(function() {
+        $.ajax({
+            url: '/channel4',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 5")).click(function() {
+        $.ajax({
+            url: '/channel5',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 6")).click(function() {
+        $.ajax({
+            url: '/channel6',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 7")).click(function() {
+        $.ajax({
+            url: '/channel7',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 8")).click(function() {
+        $.ajax({
+            url: '/channel8',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 9")).click(function() {
+        $.ajax({
+            url: '/channel9',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("channel 10")).click(function() {
+        $.ajax({
+            url: '/channel10',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
+    $(document.getElementById("voltage high")).click(function() {
         $.ajax({
             url: '/high',
             data: $('form').serialize(),
@@ -124,28 +198,40 @@ function noReload(){
 		document.myform.submit();
 	}
 }
+
+$(document).ready(function(){
+    $('#read back low').click(function(){
+        if(value=="off"){
+            value="on";
+        }
+        else{
+            value="off";
+        }
+    });
+});
+
 function addFields1(){
-	if(event.key != 'Enter'){
-		return;
-	}
+    if(event.key != 'Enter'){
+        return
+    }
 	event.preventDefault();
 	var number = document.getElementById("member").value;
-	if(number > 3){
-		number = 3;
-	}
 	var container = document.getElementById("container");
 	while (container.hasChildNodes()) {
 		container.removeChild(container.lastChild);
 	}
-	for (i=0;i<number;i++){
-		container.appendChild(document.createTextNode("Channel " + (i+1)));
+	for (i=1;i<number;i++){
+		container.appendChild(document.createTextNode("Channel " + (i+1)+" "));
 		var input = document.createElement("input");
 		var button = document.createElement("button");
-		input.type = "text";
-		input.name = "channel "+(i+1);
-		input.value = "";
+		input.type = "number";
+		input.name = "channel"+(i+1);
+		input.value = "0";
+		input.min = "0";
+		input.max = "100";
+		input.step = "0.01";
 		button.type = "button";
-		button.name = "Set High Channel "+(i+1);
+		button.id = "channel "+(i+1);
 		container.appendChild(input);
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
@@ -153,27 +239,27 @@ function addFields1(){
 	}
 }
 function addFields2(){
-	if(event.key != 'Enter'){
-		return;
-	}
+    if(event.key != 'Enter'){
+        return
+    }
 	event.preventDefault();
 	var number = document.getElementById("member2").value;
-	if(number > 3){
-		number = 3;
-	}
 	var container = document.getElementById("container2");
 	while (container.hasChildNodes()) {
 		container.removeChild(container.lastChild);
 	}
-	for (i=0;i<number;i++){
-		container.appendChild(document.createTextNode("Channel " + (i+1)));
+	for (i=1;i<number;i++){
+		container.appendChild(document.createTextNode("Channel " + (i+1)+ " "));
 		var input = document.createElement("input");
 		var button = document.createElement("button");
-		input.type = "text";
-		input.name = "channel "+(i+1);
-		input.value = "";
+		input.type = "number";
+		input.name = "channel"+(i+6);
+		input.value = "0";
+		input.min = "0";
+		input.max = "100";
+		input.step = "0.01";
 		button.type = "button";
-		button.name = "Set Low Channel "+(i+1);
+		button.id = "channel "+(i+6);
 		container.appendChild(input);
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
