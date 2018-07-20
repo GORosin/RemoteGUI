@@ -23,65 +23,9 @@ $(function() {
             type: 'POST'
         });
     });
-    $(document.getElementById("channel 2")).click(function() {
-        $.ajax({
-            url: '/channel2',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 3")).click(function() {
-        $.ajax({
-            url: '/channel3',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 4")).click(function() {
-        $.ajax({
-            url: '/channel4',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 5")).click(function() {
-        $.ajax({
-            url: '/channel5',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
     $(document.getElementById("channel 6")).click(function() {
         $.ajax({
             url: '/channel6',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 7")).click(function() {
-        $.ajax({
-            url: '/channel7',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 8")).click(function() {
-        $.ajax({
-            url: '/channel8',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 9")).click(function() {
-        $.ajax({
-            url: '/channel9',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 10")).click(function() {
-        $.ajax({
-            url: '/channel10',
             data: $('form').serialize(),
             type: 'POST'
         });
@@ -199,17 +143,6 @@ function noReload(){
 	}
 }
 
-$(document).ready(function(){
-    $('#read back low').click(function(){
-        if(value=="off"){
-            value="on";
-        }
-        else{
-            value="off";
-        }
-    });
-});
-
 function addFields1(){
     if(event.key != 'Enter'){
         return
@@ -236,15 +169,38 @@ function addFields1(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
-		$(document.getElementById(button.id)).click(function() {
+		console.log(container.childNodes);
+		/*$(document.getElementById(button.id)).click(function() {
+		    console.log(button.id)
             $.ajax({
                 url: '/'+input.name,
                 data: $('form').serialize(),
                 type: 'POST'
             });
-        });
+        });*/
 	}
+	var children = container.childNodes;
+	$(document.getElementById(button.id)).click(function() {
+        for(var child=container.firstChild; child!=null; child=child.nextSibling) {
+            console.log(child);
+            if(child.contains(input)){
+                name = child.name;
+            }
+            if(child.contains(button)){
+                console.log(button.id);
+                console.log(name);
+                $.ajax({
+                    url: '/'+name,
+                    data: $('form').serialize(),
+                    type: 'POST'
+                });
+            }
+        }
+    });
 }
+
+
+
 function addFields2(){
     if(event.key != 'Enter'){
         return
