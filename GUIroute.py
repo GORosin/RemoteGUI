@@ -11,10 +11,10 @@ def my_form():
 @app.route('/low', methods=['GET','POST'])
 def low_voltage():
     if request.method == 'POST':
-        result = request.form['low']
+        result = request.form.get('power')
         print(result)
-        ColdJig.SendServerMessage("lowV,turn,"+result)
-        ServerReply.setText(reply)
+        #ColdJig.SendServerMessage("lowV,turn,"+result)
+        #ServerReply.setText(reply)
         return render_template('my-form.html')
 
 @app.route('/channel1', methods=['GET','POST'])

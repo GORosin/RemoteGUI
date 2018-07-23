@@ -17,9 +17,10 @@
         <div class="grid-container">
             <div class="grid-item">
                 Low Voltage<br>
-                <input type = "radio" name="low" value="on"> On<br>
+                Power: <input type="button" name = "power" value="Off" id="onoff" onclick="onOff('onoff')"><br/>
+               <!-- <input type = "radio" name="low" value="on"> On<br>
                 <input type = "radio" name="low" value="off"> Off<br>
-                <button type = "button" id = "voltage low">Read Back</button><br>
+                <button type = "button" id = "voltage low">Read Back</button><br>-->
                 <input type="number" id="member" value="1" onkeydown = "addFields1()" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
                     <input type="number" name = "channel1" value="0" min = "0" max = "100" step = "0.01">
@@ -28,9 +29,10 @@
             </div>
             <div class="grid-item">
                 High Voltage<br>
-                <input type = "radio" name="high" value="on"> On<br>
+                Power: <input type="button" name = "power2" value="Off" id="onoff2" onclick="onOff('onoff2')"><br/>
+                <!--<input type = "radio" name="high" value="on"> On<br>
                 <input type = "radio" name="high" value="off"> Off<br>
-                <button type = "button" id = "voltage high">Read Back</button><br>
+                <button type = "button" id = "voltage high">Read Back</button><br>-->
                 <button type = "button" id = "IV scan">Run IV Scan</button><br>
                 <input type="number" id="member2" value="1" onkeydown = "addFields2()" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
@@ -48,10 +50,11 @@
                 <input type = "text" class = "address" name = "IP" value = "">
                 <button type="button" id = "SetPing">Ping</button><br>
                 <button type = "button" id = "Break">Break</button><br>
-                Sensor Data: <br/>
-                <input type = "radio" name = "sensor" value="on"> On<br>
+                Sensor:
+                <input type="button" name = "power" value="Off" id="onoff3" onclick="onOff('onoff3')"><br/>
+                <!--<input type = "radio" name = "sensor" value="on"> On<br>
                 <input type = "radio" name = "sensor" value="off"> Off<br>
-                <button type = "button" id = "Sensor">Read Back</button><br>
+                <button type = "button" id = "Sensor">Read Back</button><br>-->
             </div>
             <div class="grid-item">
                 ITSDAQ<br>

@@ -1,8 +1,8 @@
 $(function() {
-    $(document.getElementById("voltage low")).click(function() {
+    $(document.getElementById("onoff")).click(function() {
         $.ajax({
             url: '/low',
-            data: $('form').serialize(),
+            data: $(this).val(),
             type: 'POST'
         });
     });
@@ -136,6 +136,15 @@ $(function() {
     });
 });
 
+function onOff(buttonid){
+    currentvalue = document.getElementById(buttonid).value;
+    if(currentvalue == "Off"){
+        document.getElementById(buttonid).value="On";
+    }else{
+        document.getElementById(buttonid).value="Off";
+    }
+}
+
 function noReload(){
 	if(event.key == 'Enter'){
 		event.preventDefault();
@@ -170,17 +179,17 @@ function addFields1(){
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
 		console.log(container.childNodes);
-		/*$(document.getElementById(button.id)).click(function() {
+		$(document.getElementById(button.id)).click(function() {
 		    console.log(button.id)
             $.ajax({
                 url: '/'+input.name,
                 data: $('form').serialize(),
                 type: 'POST'
             });
-        });*/
+        });
 	}
-	var children = container.childNodes;
-	$(document.getElementById(button.id)).click(function() {
+	/*var children = container.childNodes;
+	$(document).on('click',button.id,function() {
         for(var child=container.firstChild; child!=null; child=child.nextSibling) {
             console.log(child);
             if(child.contains(input)){
@@ -196,10 +205,8 @@ function addFields1(){
                 });
             }
         }
-    });
+    });*/
 }
-
-
 
 function addFields2(){
     if(event.key != 'Enter'){
