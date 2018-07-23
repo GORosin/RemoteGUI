@@ -2,7 +2,7 @@ $(function() {
     $(document.getElementById("onoff")).click(function() {
         $.ajax({
             url: '/low',
-            data: $(this).val(),
+            data: $('form').serialize(),
             type: 'POST'
         });
     });
@@ -30,7 +30,7 @@ $(function() {
             type: 'POST'
         });
     });
-    $(document.getElementById("voltage high")).click(function() {
+    $(document.getElementById("onoff2")).click(function() {
         $.ajax({
             url: '/high',
             data: $('form').serialize(),
@@ -95,7 +95,7 @@ $(function() {
             }
         });
     });
-    $(document.getElementById("Sensor")).click(function() {
+    $(document.getElementById("onoff3")).click(function() {
         $.ajax({
             url: '/sensor',
             data: $('form').serialize(),
@@ -136,12 +136,14 @@ $(function() {
     });
 });
 
-function onOff(buttonid){
+function onOff(buttonid,inputid){
     currentvalue = document.getElementById(buttonid).value;
     if(currentvalue == "Off"){
         document.getElementById(buttonid).value="On";
+        document.getElementById(inputid).value="On";
     }else{
         document.getElementById(buttonid).value="Off";
+        document.getElementById(inputid).value="Off";
     }
 }
 

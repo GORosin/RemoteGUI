@@ -11,7 +11,7 @@ def my_form():
 @app.route('/low', methods=['GET','POST'])
 def low_voltage():
     if request.method == 'POST':
-        result = request.form.get('power')
+        result = request.form['power']
         print(result)
         #ColdJig.SendServerMessage("lowV,turn,"+result)
         #ServerReply.setText(reply)
@@ -80,10 +80,10 @@ def set_channel10():
 @app.route('/high', methods=['GET','POST'])
 def high_voltage():
     if request.method == 'POST':
-        result = request.form['high']
+        result = request.form['power2']
         print(result)
-        ColdJig.SendServerMessage("highV,turn,"+result)
-        ServerReply.setText(reply)
+        #ColdJig.SendServerMessage("highV,turn,"+result)
+        #ServerReply.setText(reply)
         return render_template('my-form.html')
 
 @app.route('/IVscan', methods=['GET','POST'])
@@ -113,7 +113,7 @@ def ping():
 @app.route('/sensor', methods=['GET','POST'])
 def sensor_data():
     if request.method == 'POST':
-        sensor = request.form['sensor']
+        sensor = request.form['power3']
         print(sensor)
         return render_template('my-form.html')
 
