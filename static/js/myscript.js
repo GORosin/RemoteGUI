@@ -154,6 +154,7 @@ function noReload(){
 	}
 }
 
+
 function addFields1(){
     if(event.key != 'Enter'){
         return
@@ -180,35 +181,40 @@ function addFields1(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
-		console.log(container.childNodes);
-		$(document.getElementById(button.id)).click(function() {
+		/*$(document.getElementById(button.id)).click(function() {
 		    console.log(button.id)
             $.ajax({
                 url: '/'+input.name,
                 data: $('form').serialize(),
                 type: 'POST'
             });
-        });
+        });*/
 	}
-	/*var children = container.childNodes;
-	$(document).on('click',button.id,function() {
-        for(var child=container.firstChild; child!=null; child=child.nextSibling) {
-            console.log(child);
-            if(child.contains(input)){
-                name = child.name;
-            }
-            if(child.contains(button)){
-                console.log(button.id);
-                console.log(name);
-                $.ajax({
-                    url: '/'+name,
-                    data: $('form').serialize(),
-                    type: 'POST'
-                });
-            }
+	var children = container.childNodes;
+    for(var child=container.firstChild; child!=null; child=child.nextSibling){
+        if(child.type=="button"){
+            name = child.id.replace(/\s/g, "");
+            console.log(name);
+            console.log(child.id);
+            $(document.getElementById(child.id)).click((function(value){
+                return function(){
+                    getInput(value);
+                }
+            })(name));
         }
-    });*/
+    }
 }
+
+
+function getInput(name){
+    console.log(name);
+    $.ajax({
+        url: '/'+name,
+        data: $('form').serialize(),
+        type: 'POST'
+    });
+};
+
 
 function addFields2(){
     if(event.key != 'Enter'){
@@ -236,12 +242,25 @@ function addFields2(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
-		$(document.getElementById(button.id)).click(function() {
+		/*$(document.getElementById(button.id)).click(function() {
             $.ajax({
                 url: '/'+input.name,
                 data: $('form').serialize(),
                 type: 'POST'
             });
-        });
+        });*/
 	}
+	var children = container.childNodes;
+    for(var child=container.firstChild; child!=null; child=child.nextSibling){
+        if(child.type=="button"){
+            name = child.id.replace(/\s/g, "");
+            console.log(name);
+            console.log(child.id);
+            $(document.getElementById(child.id)).click((function(value){
+                return function(){
+                    getInput(value);
+                }
+            })(name));
+        }
+    }
 }
