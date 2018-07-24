@@ -144,7 +144,7 @@ function noReload(){
 }
 
 
-function addFields1(){
+function addFields1(){ //used for low voltage
     if(event.key != 'Enter'){
         return
     }
@@ -168,7 +168,7 @@ function addFields1(){
 		input.type = "number";
 		input.name = "channel"+(i+1);
 		input.value = "0";
-		input.min = "0";
+		input.min = "-100";
 		input.max = "100";
 		input.step = "0.01";
 		button.type = "button";
@@ -192,9 +192,21 @@ function addFields1(){
         }
     }
 }
+function verify(input){ //hard imposes min and max limitations by changing any value over the limit to the limit value.
+    if(document.getElementById(input).value > document.getElementById(input).max){
+        document.getElementById(input).value = document.getElementById(input).max;
+    }
+    else if(document.getElementById(input).value < document.getElementById(input).min){
+        document.getElementById(input).value = document.getElementById(input).min;
+    }
+    else if(document.getElementById(input).value > 0){
+        if(input=="high"){
+            alert("Warning: Positive Voltage");
+        }
+    }
+}
 
-
-function getInput(name){
+function getInput(name){ //posts dynamic channel value
     console.log(name);
     $.ajax({
         url: '/'+name,
@@ -204,7 +216,7 @@ function getInput(name){
 };
 
 
-function addFields2(){
+function addFields2(){ //used for high voltage. separate function because too many variables are different from low voltage.
     if(event.key != 'Enter'){
         return
     }
@@ -228,8 +240,8 @@ function addFields2(){
 		input.type = "number";
 		input.name = "channel"+(i+6);
 		input.value = "0";
-		input.min = "0";
-		input.max = "100";
+		input.min = "-10000";
+		input.max = "10000";
 		input.step = "0.01";
 		button.type = "button";
 		button.id = "channel "+(i+6);
