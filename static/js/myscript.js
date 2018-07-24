@@ -6,16 +6,6 @@ $(function() {
             type: 'POST'
         });
     });
-//    $(document.getElementById("voltage low")).click(function() {
-//        var val = $(this).val();
-//            $.ajax({
-//                url: '/low',
-//                type: "POST",
-//                data:{
-//                    val
-//                }
-//            })
-//        })
     $(document.getElementById("channel 1")).click(function() {
         $.ajax({
             url: '/channel1',
@@ -150,7 +140,6 @@ function onOff(buttonid,inputid){
 function noReload(){
 	if(event.key == 'Enter'){
 		event.preventDefault();
-		document.myform.submit();
 	}
 }
 
@@ -161,6 +150,13 @@ function addFields1(){
     }
 	event.preventDefault();
 	var number = document.getElementById("member").value;
+	if(number>5){
+	    number = 5;
+	    document.getElementById("member").value = number;
+	}
+	else if(number<1){
+	    document.getElementById("member").value = 1;
+	}
 	var container = document.getElementById("container");
 	while (container.hasChildNodes()) {
 		container.removeChild(container.lastChild);
@@ -181,14 +177,6 @@ function addFields1(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
-		/*$(document.getElementById(button.id)).click(function() {
-		    console.log(button.id)
-            $.ajax({
-                url: '/'+input.name,
-                data: $('form').serialize(),
-                type: 'POST'
-            });
-        });*/
 	}
 	var children = container.childNodes;
     for(var child=container.firstChild; child!=null; child=child.nextSibling){
@@ -222,6 +210,13 @@ function addFields2(){
     }
 	event.preventDefault();
 	var number = document.getElementById("member2").value;
+	if(number>5){
+	    number = 5;
+	    document.getElementById("member2").value = number;
+	}
+	else if(number<1){
+	    document.getElementById("member2").value = 1;
+	}
 	var container = document.getElementById("container2");
 	while (container.hasChildNodes()) {
 		container.removeChild(container.lastChild);
@@ -242,13 +237,6 @@ function addFields2(){
 		container.appendChild(button);
 		button.appendChild(document.createTextNode("Set Voltage"));
 		container.appendChild(document.createElement("br"));
-		/*$(document.getElementById(button.id)).click(function() {
-            $.ajax({
-                url: '/'+input.name,
-                data: $('form').serialize(),
-                type: 'POST'
-            });
-        });*/
 	}
 	var children = container.childNodes;
     for(var child=container.firstChild; child!=null; child=child.nextSibling){
