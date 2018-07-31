@@ -12,8 +12,14 @@ def my_form():
 def low_voltage():
     if request.method == 'POST':
         result = request.form['power']
-        print(result)
+        reply = ""
+        if result == "On":
+            reply = ColdJig.SendServerMessage("lowV,turn,on")
+        elif result == "Off":
+            reply = ColdJig.SendServerMessage("lowV,turn,off")
+        print(reply)
         #ColdJig.SendServerMessage("lowV,turn,"+result)
+        #print(result)
         #ServerReply.setText(reply)
         return render_template('my-form.html')
 
@@ -81,7 +87,13 @@ def set_channel10():
 def high_voltage():
     if request.method == 'POST':
         result = request.form['power2']
-        print(result)
+        reply = ""
+        if result == "On":
+            reply = ColdJig.SendServerMessage("highV,turn,on")
+        elif result == "Off":
+            reply = ColdJig.SendServerMessage("highV,turn,off")
+        print(reply)
+        #print(result)
         #ColdJig.SendServerMessage("highV,turn,"+result)
         #ServerReply.setText(reply)
         return render_template('my-form.html')
@@ -99,14 +111,15 @@ def temperature():
         message = "chiller,set,temperature at " + temp #there was a typo here: temprature
         #print("sending message: " + message)
         reply = ColdJig.SendServerMessage(message)
-        #print(reply)
-        ServerReply.setText(reply)
-        return render_template('my-form.html')
+        print("response: "+reply)
+        #ServerReply.setText(reply)
+        return render_template('my-form.html', temperature = reply)
 
 @app.route('/ping', methods=['GET','POST'])
 def ping():
     if request.method == 'POST':
         ping = request.form['IP']
+        ColdJig.Ping()
         print(ping)
         return render_template('my-form.html')
 
@@ -114,14 +127,19 @@ def ping():
 def sensor_data():
     if request.method == 'POST':
         sensor = request.form['power3']
-        print(sensor)
+        reply = ""
+        if sensor == "On":
+            reply = ColdJig.SendServerMessage("sensors on")
+        elif sensor == "Off":
+            reply = ColdJig.SendServerMessage("sensors off")
+        print(reply)
         return render_template('my-form.html')
-
 
 @app.route('/break', methods=['GET','POST'])
 def break_connection():
-    ColdJig.SendServerMessage("break")
-    ITSDAQ.SendServerMessage("break")
+    reply = ColdJig.SendServerMessage("break")
+    print(reply)
+    #ITSDAQ.SendServerMessage("break")
     return render_template('my-form.html')
 
 @app.route('/confirmtest', methods=['GET','POST'])
@@ -136,20 +154,27 @@ def set_interlock():
     if request.method == 'POST':
         temp_before = request.form['temp before']
         temp_after = request.form['temp after']
+        reply1 = ColdJig.SendServerMessage(
+            "interlock,sht,temp,range of " + temp_before + " to" + temp_after)
         humidity_before = request.form['humidity before']
         humidity_after = request.form['humidity after']
+        reply2 = ColdJig.SendServerMessage(
+            "interlock,sht,humidity,range of " + humidity_before + " to" + humidity_after)
         hybrid_before = request.form['hybrid before']
         hybrid_after = request.form['hybrid after']
+        reply3 = ColdJig.SendServerMessage(
+            "interlock,user ntc,range of " + hybrid_before + " to" + hybrid_after)
         user_before = request.form['user before']
         user_after = request.form['user after']
-
-        result = temp_before,temp_after,humidity_before,humidity_after,hybrid_before,hybrid_after,user_before,user_after
+        reply4 = ColdJig.SendServerMessage(
+            "interlock,hybrid ntc,range of " + user_before + " to" + user_after)
+        result = reply1+"\n"+reply2+"\n"+reply3+"\n"+reply4
         print(result)
         return render_template('my-form.html')
 
 
 if __name__ == "__main__":
-    ColdJig = Client("127.0.0.1", "5556")
-    ITSDAQ = Client("127.0.0.1", "5555")
-    Master = Client("127.0.0.1", "5554")
+    ColdJig = Client("127.0.0.1", "5554")
+    #ITSDAQ = Client("127.0.0.1", "5555")
+    #Master = Client("127.0.0.1", "5554")
     app.run(host = '127.0.0.1',port = 5000,debug=True)

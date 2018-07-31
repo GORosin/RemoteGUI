@@ -38,12 +38,12 @@ $(function() {
             url: '/temp',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
+            /*success: function(success){
+                changeText("TempMessage");
+            }
             error: function(error) {
                 console.log(error);
-            }
+            }*/
         });
     });
     $(document.getElementById("SetPing")).click(function() {
@@ -143,6 +143,9 @@ function noReload(){
 	}
 }
 
+function changeText(text){
+    document.getElementById(text).innerHTML = "Message Sent Successfully.";
+}
 
 function addFields1(){ //used for low voltage
     if(event.key != 'Enter'){
