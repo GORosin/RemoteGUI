@@ -3,6 +3,7 @@ from flask import make_response
 app = Flask(__name__)
 import zmq
 from zmq_client import Client
+from Naked.toolshed.shell import execute_js, muterun_js
 
 @app.route('/')
 def my_form():
@@ -112,8 +113,13 @@ def temperature():
         #print("sending message: " + message)
         reply = ColdJig.SendServerMessage(message)
         print("response: "+reply)
+        if reply == "b'good to go'":
+            response = execute_js('response.js')
+        else:
+            response = execute_js('failresponse.js')
+        print(response)
         #ServerReply.setText(reply)
-        return render_template('my-form.html', temperature = reply)
+        return render_template('my-form.html')
 
 @app.route('/ping', methods=['GET','POST'])
 def ping():
