@@ -1,10 +1,16 @@
 $(function() {
     $(document.getElementById("onoff")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/low',
             data: $('form').serialize(),
-            type: 'POST'
+            type: 'POST',
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("channel 1")).click(function() {
         $.ajax({
@@ -21,17 +27,17 @@ $(function() {
         });
     });
     $(document.getElementById("onoff2")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/high',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("SetTemp")).click(function() {
         var request = $.ajax({
@@ -47,82 +53,82 @@ $(function() {
         })
     });
     $(document.getElementById("SetPing")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/ping',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("Break")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/break',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("IV scan")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/IVscan',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("onoff3")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/sensor',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("Run Confirmation Test")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/confirmtest',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
     $(document.getElementById("Set Interlock")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/interlock',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
     });
 });
 

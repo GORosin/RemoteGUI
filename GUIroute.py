@@ -9,21 +9,6 @@ from Naked.toolshed.shell import execute_js, muterun_js
 def my_form():
     return render_template('my-form.html')
 
-@app.route('/low', methods=['GET','POST'])
-def low_voltage():
-    if request.method == 'POST':
-        result = request.form['power']
-        reply = ""
-        if result == "On":
-            reply = ColdJig.SendServerMessage("lowV,turn,on")
-        elif result == "Off":
-            reply = ColdJig.SendServerMessage("lowV,turn,off")
-        print(reply)
-        #ColdJig.SendServerMessage("lowV,turn,"+result)
-        #print(result)
-        #ServerReply.setText(reply)
-        return render_template('my-form.html')
-
 @app.route('/channel1', methods=['GET','POST'])
 def set_channel1():
     volts = request.form['channel1']
@@ -84,31 +69,52 @@ def set_channel10():
     print(volts)
     return render_template('my-form.html')
 
+@app.route('/low', methods=['GET','POST'])
+def low_voltage():
+    if request.method == 'POST':
+        result = request.form['power']
+        reply = ""
+        data = []
+        try:
+            if result == "On":
+                reply = ColdJig.SendServerMessage("lowV,turn,on")
+            elif result == "Off":
+                reply = ColdJig.SendServerMessage("lowV,turn,off")
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
+
 @app.route('/high', methods=['GET','POST'])
 def high_voltage():
     if request.method == 'POST':
         result = request.form['power2']
         reply = ""
-        if result == "On":
-            reply = ColdJig.SendServerMessage("highV,turn,on")
-        elif result == "Off":
-            reply = ColdJig.SendServerMessage("highV,turn,off")
-        print(reply)
-        #print(result)
-        #ColdJig.SendServerMessage("highV,turn,"+result)
-        #ServerReply.setText(reply)
-        return render_template('my-form.html')
+        data = []
+        try:
+            if result == "On":
+                reply = ColdJig.SendServerMessage("highV,turn,on")
+            elif result == "Off":
+                reply = ColdJig.SendServerMessage("highV,turn,off")
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array=data)
 
 @app.route('/IVscan', methods=['GET','POST'])
 def iv_scan():
-    ColdJig.SendServerMessage("do iv curve")
-    return render_template('my-form.html')
+    data = []
+    try:
+        ColdJig.SendServerMessage("do iv curve")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array = data)
 
 @app.route('/temp', methods=['GET','POST'])
 def temperature():
     if request.method == 'POST':
         temp = request.form['temperature']
-        #print(temp)
         message = "chiller,set,temperature at " + temp
         data = [1]
         try:
@@ -122,58 +128,81 @@ def temperature():
 def ping():
     if request.method == 'POST':
         ping = request.form['IP']
-        ColdJig.Ping()
+        data = []
+        try:
+            ColdJig.Ping()
+            data = [1]
+        except IOError:
+            data = [0]
         print(ping)
-        return render_template('my-form.html')
+        return jsonify(array = data)
 
 @app.route('/sensor', methods=['GET','POST'])
 def sensor_data():
     if request.method == 'POST':
         sensor = request.form['power3']
         reply = ""
-        if sensor == "On":
-            reply = ColdJig.SendServerMessage("sensors on")
-        elif sensor == "Off":
-            reply = ColdJig.SendServerMessage("sensors off")
-        print(reply)
-        return render_template('my-form.html')
+        data = []
+        try:
+            if sensor == "On":
+                reply = ColdJig.SendServerMessage("sensors on")
+            elif sensor == "Off":
+                reply = ColdJig.SendServerMessage("sensors off")
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
 
 @app.route('/break', methods=['GET','POST'])
 def break_connection():
-    reply = ColdJig.SendServerMessage("break")
-    print(reply)
-    #ITSDAQ.SendServerMessage("break")
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("break")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array = data)
 
 @app.route('/confirmtest', methods=['GET','POST'])
 def confirmation_test():
     if request.method == 'POST':
         result = request.form['test']
+        data = []
+        try:
+            ColdJig.SendServerMessage("start test at: "+result)
+            data = [1]
+        except IOError:
+            data = [0]
         print(result)
-        return render_template('my-form.html')
+        return jsonify(array = data)
 
 @app.route('/interlock', methods=['GET','POST'])
 def set_interlock():
     if request.method == 'POST':
         temp_before = request.form['temp before']
         temp_after = request.form['temp after']
-        reply1 = ColdJig.SendServerMessage(
-            "interlock,sht,temp,range of " + temp_before + " to" + temp_after)
         humidity_before = request.form['humidity before']
         humidity_after = request.form['humidity after']
-        reply2 = ColdJig.SendServerMessage(
-            "interlock,sht,humidity,range of " + humidity_before + " to" + humidity_after)
         hybrid_before = request.form['hybrid before']
         hybrid_after = request.form['hybrid after']
-        reply3 = ColdJig.SendServerMessage(
-            "interlock,user ntc,range of " + hybrid_before + " to" + hybrid_after)
         user_before = request.form['user before']
         user_after = request.form['user after']
-        reply4 = ColdJig.SendServerMessage(
-            "interlock,hybrid ntc,range of " + user_before + " to" + user_after)
-        result = reply1+"\n"+reply2+"\n"+reply3+"\n"+reply4
-        print(result)
-        return render_template('my-form.html')
+        data = []
+        try:
+            reply1 = ColdJig.SendServerMessage(
+                "interlock,sht,temp,range of " + temp_before + " to" + temp_after)
+            reply2 = ColdJig.SendServerMessage(
+                "interlock,sht,humidity,range of " + humidity_before + " to" + humidity_after)
+            reply3 = ColdJig.SendServerMessage(
+                "interlock,user ntc,range of " + hybrid_before + " to" + hybrid_after)
+            reply4 = ColdJig.SendServerMessage(
+                "interlock,hybrid ntc,range of " + user_before + " to" + user_after)
+            result = reply1+"\n"+reply2+"\n"+reply3+"\n"+reply4
+            data = [1]
+            print(result)
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
 
 
 if __name__ == "__main__":
