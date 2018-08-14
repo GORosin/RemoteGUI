@@ -42,8 +42,8 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data);
-            changeText("myspan")
+            console.log(array_data[0]);
+            changeText("myspan", array_data[0])
         })
     });
     $(document.getElementById("SetPing")).click(function() {
@@ -143,8 +143,13 @@ function noReload(){
 	}
 }
 
-function changeText(text){
-    document.getElementById(text).innerHTML = "Message Sent Successfully.";
+function changeText(text, num){
+    if(num == 1){
+        document.getElementById(text).innerHTML = "Replied";
+    }
+    else{
+        document.getElementById(text).innerHTML = "Server not responding";
+    }
 }
 
 function addFields1(){ //used for low voltage

@@ -110,8 +110,12 @@ def temperature():
         temp = request.form['temperature']
         #print(temp)
         message = "chiller,set,temperature at " + temp
-        reply = ColdJig.SendServerMessage(message)
-        data = [reply]
+        data = [1]
+        try:
+            reply = ColdJig.SendServerMessage(message)
+            data = [1]
+        except IOError:
+            data = [0]
         return jsonify(array=data)
 
 @app.route('/ping', methods=['GET','POST'])
