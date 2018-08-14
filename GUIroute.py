@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for,request
+from flask import Flask, render_template, redirect, url_for,request, jsonify
 from flask import make_response
 app = Flask(__name__)
 import zmq
@@ -108,18 +108,11 @@ def iv_scan():
 def temperature():
     if request.method == 'POST':
         temp = request.form['temperature']
-        print(temp)
-        message = "chiller,set,temperature at " + temp #there was a typo here: temprature
-        #print("sending message: " + message)
+        #print(temp)
+        message = "chiller,set,temperature at " + temp
         reply = ColdJig.SendServerMessage(message)
-        print("response: "+reply)
-        if reply == "b'good to go'":
-            response = execute_js('response.js')
-        else:
-            response = execute_js('failresponse.js')
-        print(response)
-        #ServerReply.setText(reply)
-        return render_template('my-form.html')
+        data = [reply]
+        return jsonify(array=data)
 
 @app.route('/ping', methods=['GET','POST'])
 def ping():

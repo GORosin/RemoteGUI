@@ -34,17 +34,17 @@ $(function() {
         });
     });
     $(document.getElementById("SetTemp")).click(function() {
-        $.ajax({
+        var request = $.ajax({
             url: '/temp',
             data: $('form').serialize(),
             type: 'POST',
-            /*success: function(success){
-                changeText("TempMessage");
-            }
-            error: function(error) {
-                console.log(error);
-            }*/
+            dataType: "html"
         });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log(array_data);
+            changeText("myspan")
+        })
     });
     $(document.getElementById("SetPing")).click(function() {
         $.ajax({
