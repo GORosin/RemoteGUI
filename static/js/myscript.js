@@ -48,7 +48,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2])
+            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel 1")
         })
     });
     $(document.getElementById("channel 6")).click(function() {
@@ -74,7 +74,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2])
+            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel 1")
         })
     });
     $(document.getElementById("SetTemp")).click(function() {
@@ -155,6 +155,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("standardtest")).click(function() {
+        var request = $.ajax({
+            url: '/standardtest',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
+    });
     $(document.getElementById("Set Interlock")).click(function() {
         var request = $.ajax({
             url: '/interlock',
@@ -196,9 +209,9 @@ function changeText(text, num){
     }
 }
 
-function readVoltCurrent(text, num, volt, current){
+function readVoltCurrent(text, num, volt, current, channel){
     if(num == 1){
-        document.getElementById(text).innerHTML = "Voltage: "+volt+", Current: "+current;
+        document.getElementById(text).innerHTML = channel+" Voltage: "+volt+", Current: "+current;
     }
     else{
         document.getElementById(text).innerHTML = "Server not responding";
