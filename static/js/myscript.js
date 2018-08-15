@@ -157,7 +157,7 @@ function changeText(text, num){
     }
 }
 
-function addFields1(){ //used for low voltage
+function addFields1(event){ //used for low voltage
     if(event.key != 'Enter'){
         return
     }
@@ -236,7 +236,7 @@ function getInput(name){ //posts dynamic channel value
 };
 
 
-function addFields2(){ //used for high voltage. separate function because too many variables are different from low voltage.
+function addFields2(event){ //used for high voltage. separate function because too many variables are different from low voltage.
     if(event.key != 'Enter'){
         return
     }

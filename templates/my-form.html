@@ -23,7 +23,7 @@
                <!-- <input type = "radio" name="low" value="on"> On<br>
                 <input type = "radio" name="low" value="off"> Off<br>
                 <button type = "button" id = "voltage low">Read Back</button><br>-->
-                <input type="number" id="member" value="1" onkeydown = "addFields1()" min = "1" max = "5"> Channel(s) <br />
+                <input type="number" id="member" value="1" onkeydown = "addFields1(event)" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
                     <input type="number" id = "low" name = "channel1" value="0" min = "-100" max = "100" step = "0.01">
                     <button type="button" id = "channel 1" onclick="verify('low')">Set Voltage</button><br/>
@@ -38,7 +38,7 @@
                 <input type = "radio" name="high" value="off"> Off<br>
                 <button type = "button" id = "voltage high">Read Back</button><br>-->
                 <button type = "button" id = "IV scan">Run IV Scan</button><br>
-                <input type="number" id="member2" value="1" onkeydown = "addFields2()" min = "1" max = "5"> Channel(s) <br />
+                <input type="number" id="member2" value="1" onkeydown = "addFields2(event)" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
                     <input type="number" id = "high" name = "channel6" value="0" min = "-10000" max = "10000" step = "0.01">
                     <button type="button" id = "channel 6" onclick="verify('high')">Set Voltage</button><br/>
