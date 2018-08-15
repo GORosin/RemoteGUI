@@ -219,6 +219,10 @@ function readVoltCurrent(text, num, volt, current, channel){
 }
 
 function verify(input){ //hard imposes min and max limitations by changing any value over the limit to the limit value.
+    console.log(input);
+    if(input.includes("read")){
+        return
+    }
     if(parseFloat(document.getElementById(input).value) > document.getElementById(input).max){
         document.getElementById(input).value = document.getElementById(input).max;
     }
@@ -226,14 +230,14 @@ function verify(input){ //hard imposes min and max limitations by changing any v
         document.getElementById(input).value = document.getElementById(input).min;
     }
     if(parseFloat(document.getElementById(input).value) > 0){
-        console.log("input"+input)
+        //console.log("input"+input)
         if(input=="high"||input=="channel7"||input=="channel8"||input=="channel9"||input=="channel10"){
             alert("Warning: Positive Voltage");
         }
     }
 }
 
-function getInput(name){ //posts dynamic channel value
+function getInput(name, channel){ //posts dynamic channel value
     //console.log(name);
     var request = $.ajax({
         url: '/'+name,
@@ -244,27 +248,16 @@ function getInput(name){ //posts dynamic channel value
     request.done(function(JSON_array){
         array_data = JSON.parse(JSON_array)["array"];
         //console.log(array_data[0]);
-        changeText("myspan", array_data[0])
-    })
-};
-
-function readInput(name, channel){ //gets dynamic channel values
-    //console.log(name);
-    var request = $.ajax({
-        url: '/'+name,
-        data: $('form').serialize(),
-        type: 'POST',
-        dataType: "html"
-    });
-    request.done(function(JSON_array){
-        array_data = JSON.parse(JSON_array)["array"];
-        //console.log(array_data[0]);
-        console.log(parseInt(channel)-5)
-        if(parseInt(channel)>5){
-            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel "+(parseInt(channel)-5))
+        if(name.includes("read")){
+            if(parseInt(channel)>5){
+                readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel "+(parseInt(channel)-5))
+            }
+            else{
+                readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel "+channel)
+            }
         }
         else{
-            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel "+channel)
+            changeText("myspan", array_data[0])
         }
     })
 };
@@ -293,6 +286,7 @@ function addFields1(event){ //used for low voltage
 		var read = document.createElement("button");
 		input.type = "number";
 		input.name = "channel"+(i+1);
+		input.id = "channel"+(i+1);
 		input.value = "0";
 		input.min = "-100";
 		input.max = "100";
@@ -321,13 +315,9 @@ function addFields1(event){ //used for low voltage
             //console.log(child.id);
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
-                    if(name.includes("read")){
-                        readInput(value,parseInt(channel))
-                    }
-                    else{
-                        getInput(value);
-                        verify(value)
-                    }
+                    getInput(value, channel);
+                    console.log(value);
+                    verify(value)
                 }
             })(name));
         }
@@ -379,21 +369,17 @@ function addFields2(event){ //used for high voltage. separate function because t
         if(child.type=="button"){
             name = child.id.replace(/\s/g, "");
             channel = ""
-            if(name.includes("read")){
-                channel = name.replace("readchannel","")
-            }
             console.log(name);
             console.log(channel)
             //console.log(child.id);
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
                     if(name.includes("read")){
-                        readInput(value,channel)
+                        channel = name.replace("readchannel","")
                     }
-                    else{
-                        getInput(value);
-                        verify(value)
-                    }
+                    getInput(value, channel);
+                    console.log(value);
+                    verify(value)
                 }
             })(name));
         }
