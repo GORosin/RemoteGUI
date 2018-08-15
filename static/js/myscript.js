@@ -250,10 +250,10 @@ function getInput(name, channel){ //posts dynamic channel value
         //console.log(array_data[0]);
         if(name.includes("read")){
             if(parseInt(channel)>5){
-                readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel "+(parseInt(channel)-5))
+                readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel "+array_data[3])
             }
             else{
-                readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel "+channel)
+                readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel "+array_data[3])
             }
         }
         else{
