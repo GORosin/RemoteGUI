@@ -13,61 +13,122 @@ def my_form():
 def set_channel1():
     volts = request.form['channel1']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 1")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array = data)
 
 @app.route('/channel2', methods=['GET','POST'])
 def set_channel2():
     volts = request.form['channel2']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 2")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array = data)
 
 @app.route('/channel3', methods=['GET','POST'])
 def set_channel3():
     volts = request.form['channel3']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 3")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel4', methods=['GET','POST'])
 def set_channel4():
     volts = request.form['channel4']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 4")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel5', methods=['GET','POST'])
 def set_channel5():
     volts = request.form['channel5']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 5")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel6', methods=['GET','POST'])
 def set_channel6():
     volts = request.form['channel6']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 6")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
+
 
 @app.route('/channel7', methods=['GET','POST'])
 def set_channel7():
     volts = request.form['channel7']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 7")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel8', methods=['GET','POST'])
 def set_channel8():
     volts = request.form['channel8']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 8")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel9', methods=['GET','POST'])
 def set_channel9():
     volts = request.form['channel9']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 9")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/channel10', methods=['GET','POST'])
 def set_channel10():
     volts = request.form['channel10']
     print(volts)
-    return render_template('my-form.html')
+    data = []
+    try:
+        reply = ColdJig.SendServerMessage("lowv,voltage,get, channel 10")
+        data = [1]
+    except IOError:
+        data = [0]
+    return jsonify(array=data)
 
 @app.route('/low', methods=['GET','POST'])
 def low_voltage():

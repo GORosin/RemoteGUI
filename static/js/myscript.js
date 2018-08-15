@@ -8,34 +8,33 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
     $(document.getElementById("channel 1")).click(function() {
-        $.ajax({
-            url: '/channel1',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("channel 6")).click(function() {
-        $.ajax({
-            url: '/channel6',
-            data: $('form').serialize(),
-            type: 'POST'
-        });
-    });
-    $(document.getElementById("onoff2")).click(function() {
         var request = $.ajax({
-            url: '/high',
+            url: '/channel1',
             data: $('form').serialize(),
             type: 'POST',
             dataType: "html"
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
+    });
+    $(document.getElementById("channel 6")).click(function() {
+        var request = $.ajax({
+            url: '/channel6',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -48,7 +47,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -61,7 +60,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -74,7 +73,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -87,7 +86,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -100,7 +99,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -113,7 +112,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -126,7 +125,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            console.log(array_data[0]);
+            //console.log(array_data[0]);
             changeText("myspan", array_data[0])
         })
     });
@@ -196,8 +195,8 @@ function addFields1(){ //used for low voltage
     for(var child=container.firstChild; child!=null; child=child.nextSibling){
         if(child.type=="button"){
             name = child.id.replace(/\s/g, "");
-            console.log(name);
-            console.log(child.id);
+            //console.log(name);
+            //console.log(child.id);
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
                     getInput(value);
@@ -207,13 +206,14 @@ function addFields1(){ //used for low voltage
     }
 }
 function verify(input){ //hard imposes min and max limitations by changing any value over the limit to the limit value.
-    if(document.getElementById(input).value > document.getElementById(input).max){
+    if(parseFloat(document.getElementById(input).value) > document.getElementById(input).max){
         document.getElementById(input).value = document.getElementById(input).max;
     }
-    else if(document.getElementById(input).value < document.getElementById(input).min){
+    else if(parseFloat(document.getElementById(input).value) < document.getElementById(input).min){
         document.getElementById(input).value = document.getElementById(input).min;
     }
-    else if(document.getElementById(input).value > 0){
+    if(parseFloat(document.getElementById(input).value) > 0){
+        //console.log(input)
         if(input=="high"){
             alert("Warning: Positive Voltage");
         }
@@ -221,12 +221,18 @@ function verify(input){ //hard imposes min and max limitations by changing any v
 }
 
 function getInput(name){ //posts dynamic channel value
-    console.log(name);
-    $.ajax({
+    //console.log(name);
+    var request = $.ajax({
         url: '/'+name,
         data: $('form').serialize(),
-        type: 'POST'
+        type: 'POST',
+        dataType: "html"
     });
+    request.done(function(JSON_array){
+        array_data = JSON.parse(JSON_array)["array"];
+        //console.log(array_data[0]);
+        changeText("myspan", array_data[0])
+    })
 };
 
 
@@ -268,8 +274,8 @@ function addFields2(){ //used for high voltage. separate function because too ma
     for(var child=container.firstChild; child!=null; child=child.nextSibling){
         if(child.type=="button"){
             name = child.id.replace(/\s/g, "");
-            console.log(name);
-            console.log(child.id);
+            //console.log(name);
+            //console.log(child.id);
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
                     getInput(value);
