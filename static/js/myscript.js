@@ -214,7 +214,7 @@ function verify(input){ //hard imposes min and max limitations by changing any v
     }
     if(parseFloat(document.getElementById(input).value) > 0){
         //console.log(input)
-        if(input=="high"){
+        if(input=="high"||input=="channel7"||input=="channel8"||input=="channel9"||input=="channel10"){
             alert("Warning: Positive Voltage");
         }
     }
@@ -259,6 +259,7 @@ function addFields2(){ //used for high voltage. separate function because too ma
 		var button = document.createElement("button");
 		input.type = "number";
 		input.name = "channel"+(i+6);
+		input.id = "channel"+(i+6);
 		input.value = "0";
 		input.min = "-10000";
 		input.max = "10000";
@@ -279,6 +280,7 @@ function addFields2(){ //used for high voltage. separate function because too ma
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
                     getInput(value);
+                    verify(value);
                 }
             })(name));
         }
