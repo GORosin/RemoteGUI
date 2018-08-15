@@ -25,6 +25,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("read channel 1")).click(function() {
+        var request = $.ajax({
+            url: '/readchannel1',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2])
+        })
+    });
     $(document.getElementById("channel 6")).click(function() {
         var request = $.ajax({
             url: '/channel6',
@@ -151,6 +164,15 @@ function noReload(){
 function changeText(text, num){
     if(num == 1){
         document.getElementById(text).innerHTML = "Replied";
+    }
+    else{
+        document.getElementById(text).innerHTML = "Server not responding";
+    }
+}
+
+function readVoltCurrent(text, num, volt, current){
+    if(num == 1){
+        document.getElementById(text).innerHTML = "Voltage: "+volt+", Current: "+current;
     }
     else{
         document.getElementById(text).innerHTML = "Server not responding";
