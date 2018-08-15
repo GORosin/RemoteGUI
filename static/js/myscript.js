@@ -218,55 +218,6 @@ function readVoltCurrent(text, num, volt, current, channel){
     }
 }
 
-function addFields1(event){ //used for low voltage
-    if(event.key != 'Enter'){
-        return
-    }
-	event.preventDefault();
-	var number = document.getElementById("member").value;
-	if(number>5){
-	    number = 5;
-	    document.getElementById("member").value = number;
-	}
-	else if(number<1){
-	    document.getElementById("member").value = 1;
-	}
-	var container = document.getElementById("container");
-	while (container.hasChildNodes()) {
-		container.removeChild(container.lastChild);
-	}
-	for (i=1;i<number;i++){
-		container.appendChild(document.createTextNode("Channel " + (i+1)+" "));
-		var input = document.createElement("input");
-		var button = document.createElement("button");
-		input.type = "number";
-		input.name = "channel"+(i+1);
-		input.value = "0";
-		input.min = "-100";
-		input.max = "100";
-		input.step = "0.01";
-		button.type = "button";
-		button.id = "channel "+(i+1);
-		container.appendChild(input);
-		container.appendChild(button);
-		button.appendChild(document.createTextNode("Set Voltage"));
-		container.appendChild(document.createElement("br"));
-	}
-	var children = container.childNodes;
-    for(var child=container.firstChild; child!=null; child=child.nextSibling){
-        if(child.type=="button"){
-            name = child.id.replace(/\s/g, "");
-            //console.log(name);
-            //console.log(child.id);
-            $(document.getElementById(child.id)).click((function(value){
-                return function(){
-                    getInput(value);
-                    verify(value);
-                }
-            })(name));
-        }
-    }
-}
 function verify(input){ //hard imposes min and max limitations by changing any value over the limit to the limit value.
     if(parseFloat(document.getElementById(input).value) > document.getElementById(input).max){
         document.getElementById(input).value = document.getElementById(input).max;
@@ -275,7 +226,7 @@ function verify(input){ //hard imposes min and max limitations by changing any v
         document.getElementById(input).value = document.getElementById(input).min;
     }
     if(parseFloat(document.getElementById(input).value) > 0){
-        //console.log(input)
+        console.log("input"+input)
         if(input=="high"||input=="channel7"||input=="channel8"||input=="channel9"||input=="channel10"){
             alert("Warning: Positive Voltage");
         }
@@ -297,6 +248,91 @@ function getInput(name){ //posts dynamic channel value
     })
 };
 
+function readInput(name, channel){ //gets dynamic channel values
+    //console.log(name);
+    var request = $.ajax({
+        url: '/'+name,
+        data: $('form').serialize(),
+        type: 'POST',
+        dataType: "html"
+    });
+    request.done(function(JSON_array){
+        array_data = JSON.parse(JSON_array)["array"];
+        //console.log(array_data[0]);
+        console.log(parseInt(channel)-5)
+        if(parseInt(channel)>5){
+            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel "+(parseInt(channel)-5))
+        }
+        else{
+            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel "+channel)
+        }
+    })
+};
+
+function addFields1(event){ //used for low voltage
+    if(event.key != 'Enter'){
+        return
+    }
+	event.preventDefault();
+	var number = document.getElementById("member").value;
+	if(number>5){
+	    number = 5;
+	    document.getElementById("member").value = number;
+	}
+	else if(number<1){
+	    document.getElementById("member").value = 1;
+	}
+	var container = document.getElementById("container");
+	while (container.hasChildNodes()) {
+		container.removeChild(container.lastChild);
+	}
+	for (i=1;i<number;i++){
+		container.appendChild(document.createTextNode("Channel " + (i+1)+" "));
+		var input = document.createElement("input");
+		var button = document.createElement("button");
+		var read = document.createElement("button");
+		input.type = "number";
+		input.name = "channel"+(i+1);
+		input.value = "0";
+		input.min = "-100";
+		input.max = "100";
+		input.step = "0.01";
+		button.type = "button";
+		button.id = "channel "+(i+1);
+		read.type = "button";
+		read.id = "read channel "+(i+1);
+		container.appendChild(input);
+		container.appendChild(button);
+		container.appendChild(read);
+		button.appendChild(document.createTextNode("Set Voltage"));
+		read.appendChild(document.createTextNode("Read Back"));
+		container.appendChild(document.createElement("br"));
+	}
+	var children = container.childNodes;
+    for(var child=container.firstChild; child!=null; child=child.nextSibling){
+        if(child.type=="button"){
+            name = child.id.replace(/\s/g, "");
+            channel = ""
+            if(name.includes("read")){
+                channel = name.replace("readchannel","")
+            }
+            console.log(name);
+            console.log(channel)
+            //console.log(child.id);
+            $(document.getElementById(child.id)).click((function(value){
+                return function(){
+                    if(name.includes("read")){
+                        readInput(value,parseInt(channel))
+                    }
+                    else{
+                        getInput(value);
+                        verify(value)
+                    }
+                }
+            })(name));
+        }
+    }
+}
 
 function addFields2(event){ //used for high voltage. separate function because too many variables are different from low voltage.
     if(event.key != 'Enter'){
@@ -319,6 +355,7 @@ function addFields2(event){ //used for high voltage. separate function because t
 		container.appendChild(document.createTextNode("Channel " + (i+1)+ " "));
 		var input = document.createElement("input");
 		var button = document.createElement("button");
+		var read = document.createElement("button");
 		input.type = "number";
 		input.name = "channel"+(i+6);
 		input.id = "channel"+(i+6);
@@ -328,21 +365,35 @@ function addFields2(event){ //used for high voltage. separate function because t
 		input.step = "0.01";
 		button.type = "button";
 		button.id = "channel "+(i+6);
+		read.type = "button";
+		read.id = "read channel "+(i+6);
 		container.appendChild(input);
 		container.appendChild(button);
+		container.appendChild(read);
 		button.appendChild(document.createTextNode("Set Voltage"));
+		read.appendChild(document.createTextNode("Read Back"));
 		container.appendChild(document.createElement("br"));
 	}
 	var children = container.childNodes;
     for(var child=container.firstChild; child!=null; child=child.nextSibling){
         if(child.type=="button"){
             name = child.id.replace(/\s/g, "");
-            //console.log(name);
+            channel = ""
+            if(name.includes("read")){
+                channel = name.replace("readchannel","")
+            }
+            console.log(name);
+            console.log(channel)
             //console.log(child.id);
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
-                    getInput(value);
-                    verify(value);
+                    if(name.includes("read")){
+                        readInput(value,channel)
+                    }
+                    else{
+                        getInput(value);
+                        verify(value)
+                    }
                 }
             })(name));
         }
