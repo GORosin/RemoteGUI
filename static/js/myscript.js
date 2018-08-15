@@ -51,6 +51,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("read channel 6")).click(function() {
+        var request = $.ajax({
+            url: '/readchannel6',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2])
+        })
+    });
     $(document.getElementById("SetTemp")).click(function() {
         var request = $.ajax({
             url: '/temp',
