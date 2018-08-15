@@ -261,6 +261,7 @@ function addFields1(event){ //used for low voltage
             $(document.getElementById(child.id)).click((function(value){
                 return function(){
                     getInput(value);
+                    verify(value);
                 }
             })(name));
         }

@@ -15,7 +15,7 @@ def set_channel1():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts)
+        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 1")
         data = [1]
     except IOError:
         data = [0]
@@ -39,7 +39,7 @@ def set_channel2():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts)
+        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 2")
         data = [1]
     except IOError:
         data = [0]
@@ -51,7 +51,7 @@ def set_channel3():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts)
+        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 3")
         data = [1]
     except IOError:
         data = [0]
@@ -63,7 +63,7 @@ def set_channel4():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts)
+        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 4")
         data = [1]
     except IOError:
         data = [0]
@@ -75,7 +75,7 @@ def set_channel5():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts)
+        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 5")
         data = [1]
     except IOError:
         data = [0]
@@ -87,7 +87,7 @@ def set_channel6():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 1")
         data = [1]
     except IOError:
         data = [0]
@@ -111,7 +111,7 @@ def set_channel7():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 2")
         data = [1]
     except IOError:
         data = [0]
@@ -123,7 +123,7 @@ def set_channel8():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 3")
         data = [1]
     except IOError:
         data = [0]
@@ -135,7 +135,7 @@ def set_channel9():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 4")
         data = [1]
     except IOError:
         data = [0]
@@ -147,7 +147,7 @@ def set_channel10():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 5")
         data = [1]
     except IOError:
         data = [0]
