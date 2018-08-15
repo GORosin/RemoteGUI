@@ -349,7 +349,7 @@ def confirmation_test():
         result = request.form['test']
         data = []
         try:
-            ColdJig.SendServerMessage("start test at: "+result)
+            Master.SendServerMessage("start test at: "+result)
             data = [1]
         except IOError:
             data = [0]
@@ -401,5 +401,5 @@ def set_interlock():
 if __name__ == "__main__":
     ColdJig = Client("127.0.0.1", "5554")
     ITSDAQ = Client("127.0.0.1", "5555")
-    #Master = Client("127.0.0.1", "5554")
+    Master = Client("127.0.0.1", "5556")
     app.run(host = '127.0.0.1',port = 5000,debug=True)
