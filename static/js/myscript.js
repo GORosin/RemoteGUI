@@ -12,6 +12,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("onoff2")).click(function() {
+        var request = $.ajax({
+            url: '/high',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
+    });
     $(document.getElementById("channel 1")).click(function() {
         var request = $.ajax({
             url: '/channel1',
