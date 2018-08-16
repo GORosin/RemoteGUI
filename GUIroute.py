@@ -3,7 +3,6 @@ from flask import make_response
 app = Flask(__name__)
 import zmq
 from zmq_client import Client
-from Naked.toolshed.shell import execute_js, muterun_js
 
 @app.route('/')
 def my_form():
@@ -15,7 +14,7 @@ def set_channel1():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 1")
+        reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 1")
         data = [1]
     except IOError:
         data = [0]
@@ -25,8 +24,9 @@ def set_channel1():
 def read_channel1():
     data = []
     try:
-        volt = ColdJig.SendServerMessage("lowv,voltage,get,channel 1")
-        current = ColdJig.SendServerMessage("lowv,current,get,channel 1")
+        volt = ColdJig.SendServerMessage("lowv,voltage,get, channel 1")
+        print(volt)
+        current = ColdJig.SendServerMessage("lowv,current,get, channel 1")
         data = [1,volt, current,1]
     except IOError:
         data = [0]
@@ -39,7 +39,7 @@ def set_channel2():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 2")
+        reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 2")
         data = [1]
     except IOError:
         data = [0]
@@ -49,8 +49,8 @@ def set_channel2():
 def read_channel2():
     data = []
     try:
-        volt = ColdJig.SendServerMessage("lowv,voltage,get,channel 2")
-        current = ColdJig.SendServerMessage("lowv,current,get,channel 2")
+        volt = ColdJig.SendServerMessage("lowv,voltage,get, channel 2")
+        current = ColdJig.SendServerMessage("lowv,current,get, channel 2")
         data = [1,volt, current,2]
     except IOError:
         data = [0]
@@ -63,7 +63,7 @@ def set_channel3():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 3")
+        reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 3")
         data = [1]
     except IOError:
         data = [0]
@@ -73,8 +73,8 @@ def set_channel3():
 def read_channel3():
     data = []
     try:
-        volt = ColdJig.SendServerMessage("lowv,voltage,get,channel 3")
-        current = ColdJig.SendServerMessage("lowv,current,get,channel 3")
+        volt = ColdJig.SendServerMessage("lowv,voltage,get, channel 3")
+        current = ColdJig.SendServerMessage("lowv,current,get, channel 3")
         data = [1,volt, current,3]
     except IOError:
         data = [0]
@@ -87,7 +87,7 @@ def set_channel4():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 4")
+        reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 4")
         data = [1]
     except IOError:
         data = [0]
@@ -111,7 +111,7 @@ def set_channel5():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("lowV,set,voltage to "+volts+" 5")
+        reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 5")
         data = [1]
     except IOError:
         data = [0]
@@ -135,7 +135,7 @@ def set_channel6():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 1")
+        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
         data = [1]
     except IOError:
         data = [0]
@@ -145,8 +145,8 @@ def set_channel6():
 def read_channel6():
     data = []
     try:
-        volt = ColdJig.SendServerMessage("highv,voltage,get channel 1")
-        current = ColdJig.SendServerMessage("highv,current,get,channel 1")
+        volt = ColdJig.SendServerMessage("highv,voltage,get")
+        current = ColdJig.SendServerMessage("highv,current,get")
         data = [1,volt, current,1]
     except IOError:
         data = [0]
@@ -159,7 +159,7 @@ def set_channel7():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 2")
+        reply = ColdJig.SendServerMessage("highV, voltage,"+volts)
         data = [1]
     except IOError:
         data = [0]
@@ -183,7 +183,7 @@ def set_channel8():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 3")
+        reply = ColdJig.SendServerMessage("highV, voltage,set "+volts)
         data = [1]
     except IOError:
         data = [0]
@@ -207,7 +207,7 @@ def set_channel9():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts+" 4")
+        reply = ColdJig.SendServerMessage("highV, voltage,set "+volts+" 4")
         data = [1]
     except IOError:
         data = [0]
@@ -399,7 +399,7 @@ def set_interlock():
 
 
 if __name__ == "__main__":
-    ColdJig = Client("127.0.0.1", "5554")
-    ITSDAQ = Client("127.0.0.1", "5555")
-    Master = Client("127.0.0.1", "5556")
+    ColdJig = Client("10.2.242.125", "5556")
+    #ITSDAQ = Client("127.0.0.1", "5555")
+    #Master = Client("127.0.0.1", "5556")
     app.run(host = '127.0.0.1',port = 5000,debug=True)
