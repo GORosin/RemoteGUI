@@ -294,10 +294,22 @@ def temperature():
     if request.method == 'POST':
         temp = request.form['temperature']
         message = "chiller,set,temperature at " + temp
-        data = [1]
+        data = []
         try:
             reply = ColdJig.SendServerMessage(message)
             data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array=data)
+
+@app.route('/readtemp', methods=['GET','POST'])
+def read_temp():
+    if request.method == 'POST':
+        message = "chiller, get"
+        data = []
+        try:
+            reply = ColdJig.SendServerMessage(message)
+            data = [1,reply]
         except IOError:
             data = [0]
         return jsonify(array=data)

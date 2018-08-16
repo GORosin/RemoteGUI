@@ -90,6 +90,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("ReadTemp")).click(function() {
+        var request = $.ajax({
+            url: '/readtemp',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            readTemp("tempspan", array_data[0], array_data[1])
+        })
+    });
     $(document.getElementById("SetPing")).click(function() {
         var request = $.ajax({
             url: '/ping',
@@ -212,6 +225,15 @@ function changeText(text, num){
 function readVoltCurrent(text, num, volt, current, channel){
     if(num == 1){
         document.getElementById(text).innerHTML = channel+" Voltage: "+volt+", Current: "+current;
+    }
+    else{
+        document.getElementById(text).innerHTML = "Server not responding";
+    }
+}
+
+function readTemp(text, num, temp){
+    if(num == 1){
+        document.getElementById(text).innerHTML = "Current Temperature: "+temp;
     }
     else{
         document.getElementById(text).innerHTML = "Server not responding";
