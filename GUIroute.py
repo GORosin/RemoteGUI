@@ -1,9 +1,6 @@
-from flask import Flask, render_template, redirect, url_for,request, jsonify
-from flask import make_response
+from flask import Flask, render_template,request, jsonify
 app = Flask(__name__)
-import zmq
 from zmq_client import Client
-from Naked.toolshed.shell import execute_js, muterun_js
 
 @app.route('/')
 def my_form():
