@@ -1,7 +1,5 @@
-from flask import Flask, render_template, redirect, url_for,request, jsonify
-from flask import make_response
+from flask import Flask, render_template,request, jsonify
 app = Flask(__name__)
-import zmq
 from zmq_client import Client
 
 @app.route('/')
