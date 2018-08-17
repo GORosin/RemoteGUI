@@ -9,6 +9,8 @@ def my_form():
 @app.route('/password')
 def password():
     password = request.form["password"]
+    data = [1]
+    return jsonify(array = data)
     
 
 @app.route('/channel1', methods=['GET','POST'])

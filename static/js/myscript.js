@@ -1,4 +1,19 @@
 $(function() {
+    $(document.getElementById("password")).click(function() {
+        var request = $.ajax({
+            url: '/password',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            if(array_data[0]==1){
+                overlayOff();
+            }
+        })
+    });
     $(document.getElementById("onoff")).click(function() {
         var request = $.ajax({
             url: '/low',
@@ -9,7 +24,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("onoff2")).click(function() {
@@ -22,7 +37,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("channel 1")).click(function() {
@@ -35,7 +50,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("read channel 1")).click(function() {
@@ -48,7 +63,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel 1")
+            readVoltCurrent("lowspan", array_data[0], array_data[1], array_data[2], "Channel 1");
         })
     });
     $(document.getElementById("channel 6")).click(function() {
@@ -61,7 +76,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("read channel 6")).click(function() {
@@ -74,7 +89,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel 1")
+            readVoltCurrent("highspan", array_data[0], array_data[1], array_data[2], "Channel 1");
         })
     });
     $(document.getElementById("SetTemp")).click(function() {
@@ -87,7 +102,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("ReadTemp")).click(function() {
@@ -100,7 +115,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            readTemp("tempspan", array_data[0], array_data[1])
+            readTemp("tempspan", array_data[0], array_data[1]);
         })
     });
     $(document.getElementById("SetPing")).click(function() {
@@ -113,7 +128,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("Break")).click(function() {
@@ -126,7 +141,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("IV scan")).click(function() {
@@ -139,7 +154,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("onoff3")).click(function() {
@@ -152,7 +167,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("Run Confirmation Test")).click(function() {
@@ -165,7 +180,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("Run Tests")).click(function() {
@@ -178,7 +193,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("standardtest")).click(function() {
@@ -191,7 +206,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
     $(document.getElementById("Set Interlock")).click(function() {
@@ -204,7 +219,7 @@ $(function() {
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
             //console.log(array_data[0]);
-            changeText("myspan", array_data[0])
+            changeText("myspan", array_data[0]);
         })
     });
 });
