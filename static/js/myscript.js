@@ -272,7 +272,12 @@ function verify(input){ //hard imposes min and max limitations by changing any v
     if(parseFloat(document.getElementById(input).value) > 0){
         //console.log("input"+input)
         if(input=="high"||input=="channel7"||input=="channel8"||input=="channel9"||input=="channel10"){
-            alert("Warning: Positive Voltage");
+            if(confirm("Warning: Positive Voltage")){
+                console.log("confirm successful")
+            }
+            else{
+                document.getElementById(input).value = 0;
+            }
         }
     }
 }
