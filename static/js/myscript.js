@@ -209,6 +209,10 @@ $(function() {
     });
 });
 
+$(document).ready(function(){
+    overlayOn();
+})
+
 function onOff(buttonid,inputid){
     currentvalue = document.getElementById(buttonid).value;
     if(currentvalue == "Off"){
@@ -219,6 +223,15 @@ function onOff(buttonid,inputid){
         document.getElementById(inputid).value="Off";
     }
 }
+
+function overlayOn() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function overlayOff() {
+    document.getElementById("overlay").style.display = "none";
+}
+
 
 function noReload(){
 	if(event.key == 'Enter'){

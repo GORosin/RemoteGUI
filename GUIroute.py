@@ -6,6 +6,11 @@ from zmq_client import Client
 def my_form():
     return render_template('my-form.html')
 
+@app.route('/password')
+def password():
+    password = request.form["password"]
+    
+
 @app.route('/channel1', methods=['GET','POST'])
 def set_channel1():
     volts = request.form['channel1']
@@ -422,7 +427,7 @@ def set_interlock():
 
 
 if __name__ == "__main__":
-    ColdJig = Client("10.2.242.125", "5556")
+    ColdJig = Client("127.0.0.1", "5556")
     ITSDAQ = Client("127.0.0.1", "5555")
     #Master = Client("127.0.0.1", "5556")
     app.run(host = '127.0.0.1',port = 5000,debug=True)
