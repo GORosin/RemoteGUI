@@ -397,7 +397,7 @@ function addFields2(event){ //used for high voltage. separate function because t
 		input.value = "0";
 		input.min = "-10000";
 		input.max = "10000";
-		input.step = "0.01";
+		input.step = "5";
 		button.type = "button";
 		button.id = "channel "+(i+6);
 		read.type = "button";
