@@ -379,6 +379,19 @@ def standard_test():
         print(result)
         return jsonify(array = data)
 
+@app.route('/runtests', methods=['GET','POST'])
+def run_test():
+    if request.method == 'POST':
+        tests = request.form.getlist("tests")
+        print(tests)
+        data = []
+        try:
+            ITSDAQ.SendServerMessage(tests)
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
+
 @app.route('/interlock', methods=['GET','POST'])
 def set_interlock():
     if request.method == 'POST':
@@ -410,6 +423,6 @@ def set_interlock():
 
 if __name__ == "__main__":
     ColdJig = Client("10.2.242.125", "5556")
-    #ITSDAQ = Client("127.0.0.1", "5555")
+    ITSDAQ = Client("127.0.0.1", "5555")
     #Master = Client("127.0.0.1", "5556")
     app.run(host = '127.0.0.1',port = 5000,debug=True)

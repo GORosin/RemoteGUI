@@ -168,6 +168,19 @@ $(function() {
             changeText("myspan", array_data[0])
         })
     });
+    $(document.getElementById("Run Tests")).click(function() {
+        var request = $.ajax({
+            url: '/runtests',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            //console.log(array_data[0]);
+            changeText("myspan", array_data[0])
+        })
+    });
     $(document.getElementById("standardtest")).click(function() {
         var request = $.ajax({
             url: '/standardtest',
@@ -222,6 +235,11 @@ function changeText(text, num){
     }
 }
 
+function check(id, hiddenid){
+    if(document.getElementById(id).checked){
+        document.getElementById(hiddenid).disabled = true;
+    }
+}
 function readVoltCurrent(text, num, volt, current, channel){
     if(num == 1){
         document.getElementById(text).innerHTML = channel+" Voltage: "+volt+", Current: "+current;

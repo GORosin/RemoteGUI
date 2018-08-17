@@ -74,7 +74,21 @@
                 Temperature for Test<br>
                 <input type="number" name = "test" value = ""><br/>
                 <button type = "button" id = "Run Confirmation Test">Run Confirmation Test</button><br>
-                Status<br>
+                <input type="checkbox" name="tests" id = "test1" value="true" onclick="check('test1','htest1')"> Strobe Delay<br>
+                <input type="hidden" name="tests" id = "htest1" value="false">
+                <input type="checkbox" name="tests" id = "test2" value="true" onclick="check('test2','htest2')"> Three Point Gain<br>
+                <input type="hidden" name="tests" id = "htest2" value="false">
+                <input type="checkbox" name="tests" id = "test3" value="true" onclick="check('test3','htest3')"> Trimm Range<br>
+                <input type="hidden" name="tests" id = "htest3" value="false">
+                <input type="checkbox" name="tests" id = "test4" value="true" onclick="check('test4','htest4')"> Three Point Gain part 2 <br>
+                <input type="hidden" name="tests" id = "htest4" value="false">
+                <input type="checkbox" name="tests" id = "test5" value="true" onclick="check('test5','htest5')"> Response Curve <br>
+                <input type="hidden" name="tests" id = "htest5" value="false">
+                <input type="checkbox" name="tests" id = "test6" value="true" onclick="check('test6','htest6')"> Three Point Gain High Stats <br>
+                <input type="hidden" name="tests" id = "htest6" value="false">
+                <input type="checkbox" name="tests" id = "test7" value="true" onclick="check('test7','htest7')"> Noise Occupancy <br>
+                <input type="hidden" name="tests" id = "htest7" value="false">
+                <button type = "button" id = "Run Tests"> Run Tests </button><br>
             </div>
             <div class="grid-item">
                 Interlock Settings<br>
