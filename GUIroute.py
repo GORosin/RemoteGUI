@@ -6,9 +6,10 @@ from zmq_client import Client
 def my_form():
     return render_template('my-form.html')
 
-@app.route('/password')
+@app.route('/password', methods=['GET','POST'])
 def password():
-    password = request.form["password"]
+    password = request.form["passwrd"]
+    print(password)
     data = [1]
     return jsonify(array = data)
     

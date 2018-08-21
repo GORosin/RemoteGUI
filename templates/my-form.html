@@ -17,8 +17,8 @@
         <div class="grid-container">
             <div id="overlay">
                 <div id = "pass">
-                    Password: <input type="password" class = "psw"><br>
-                    <button id = "password">Submit Password</button>
+                    Password: <input type="password" name = "passwrd" value = "" class = "psw"><br>
+                    <button type="button" name = "passwrd" id = "password">Submit Password</button>
                 </div>
             </div>
             <div class="grid-item">
@@ -26,9 +26,6 @@
                 Power:
                 <input type="hidden" name = "power" value="Off" id = "lowpower">
                 <input type="button" name = "power" value="Off" id="onoff" onclick="onOff('onoff','lowpower')"><br/>
-               <!-- <input type = "radio" name="low" value="on"> On<br>
-                <input type = "radio" name="low" value="off"> Off<br>
-                <button type = "button" id = "voltage low">Read Back</button><br>-->
                 <input type="number" id="member" value="1" onkeydown = "addFields1(event)" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
                     <input type="number" id = "low" name = "channel1" value="0" min = "-100" max = "100" step = "0.01">

@@ -8,7 +8,7 @@ $(function() {
         });
         request.done(function(JSON_array){
             array_data = JSON.parse(JSON_array)["array"];
-            //console.log(array_data[0]);
+            console.log(array_data[0]);
             if(array_data[0]==1){
                 overlayOff();
             }
