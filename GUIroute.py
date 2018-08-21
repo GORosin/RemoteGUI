@@ -9,15 +9,20 @@ def my_form():
 @app.route('/password', methods=['GET','POST'])
 def password():
     password = request.form["passwrd"]
-    print(password)
-    data = [1]
+    #print(password)
+    with open('password.txt', 'r') as myfile:
+        hash = myfile.read().replace('\n', '')
+    if(password == hash):
+        data = [1]
+    else:
+        data = [0]
     return jsonify(array = data)
     
 
 @app.route('/channel1', methods=['GET','POST'])
 def set_channel1():
     volts = request.form['channel1']
-    print(volts)
+    #print(volts)
     data = []
     try:
         reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 1")
@@ -42,7 +47,7 @@ def read_channel1():
 @app.route('/channel2', methods=['GET','POST'])
 def set_channel2():
     volts = request.form['channel2']
-    print(volts)
+    #print(volts)
     data = []
     try:
         reply = ColdJig.SendServerMessage("lowV,voltage,set,voltage to "+volts+" 2")

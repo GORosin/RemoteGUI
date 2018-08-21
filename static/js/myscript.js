@@ -12,6 +12,9 @@ $(function() {
             if(array_data[0]==1){
                 overlayOff();
             }
+            else{
+                alert("Incorrect Password");
+            }
         })
     });
     $(document.getElementById("onoff")).click(function() {
