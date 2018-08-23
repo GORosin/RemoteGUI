@@ -1,4 +1,5 @@
 from flask import Flask, render_template,request, jsonify
+import  hashlib
 app = Flask(__name__)
 from zmq_client import Client
 
@@ -8,7 +9,9 @@ def my_form():
 
 @app.route('/password', methods=['GET','POST'])
 def password():
-    password = request.form["passwrd"]
+    pswd = request.form["passwrd"]
+    pswd = pswd.encode('utf-8')
+    password = hashlib.sha256(pswd).hexdigest()
     #print(password)
     with open('password.txt', 'r') as myfile:
         hash = myfile.read().replace('\n', '')
