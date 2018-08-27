@@ -7,13 +7,17 @@ import os
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    if request.form['password'] == 'password':
+    pswd = request.form['password'].encode('utf-8')
+    password = hashlib.sha256(pswd).hexdigest()
+    with open('password.txt', 'r') as myfile:
+        hash = myfile.read().replace('\n', '')
+    if password == hash:
         session['logged_in'] = True
     else:
         flash('wrong password!')
     return my_form()
 
-@app.route("/logout", methods=['POST'])
+@app.route("/logout", methods=['GET','POST'])
 def logout():
     session['logged_in'] = False
     return my_form()
@@ -24,21 +28,6 @@ def my_form():
         return render_template('login.html')
     else:
         return render_template('my-form.html')
-
-@app.route('/password', methods=['GET','POST'])
-def password():
-    pswd = request.form["passwrd"]
-    pswd = pswd.encode('utf-8')
-    password = hashlib.sha256(pswd).hexdigest()
-    #print(password)
-    with open('password.txt', 'r') as myfile:
-        hash = myfile.read().replace('\n', '')
-    if(password == hash):
-        data = [1]
-    else:
-        data = [0]
-    return jsonify(array = data)
-    
 
 @app.route('/channel1', methods=['GET','POST'])
 def set_channel1():
