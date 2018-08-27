@@ -1,4 +1,11 @@
 $(function() {
+    $(document.getElementById("logout")).click(function() {
+        $.ajax({
+            url: '/logout',
+            data: $('form').serialize(),
+            type: 'POST'
+        });
+    });
     $(document.getElementById("password")).click(function() {
         var request = $.ajax({
             url: '/password',
@@ -227,9 +234,6 @@ $(function() {
     });
 });
 
-$(document).ready(function(){
-    overlayOn();
-})
 
 function onOff(buttonid,inputid){
     currentvalue = document.getElementById(buttonid).value;
@@ -241,15 +245,6 @@ function onOff(buttonid,inputid){
         document.getElementById(inputid).value="Off";
     }
 }
-
-function overlayOn() {
-    document.getElementById("overlay").style.display = "block";
-}
-
-function overlayOff() {
-    document.getElementById("overlay").style.display = "none";
-}
-
 
 function noReload(){
 	if(event.key == 'Enter'){

@@ -1,11 +1,29 @@
-from flask import Flask, render_template,request, jsonify
+from flask import Flask, render_template, request, jsonify, session, flash, abort
+import time
 import  hashlib
 app = Flask(__name__)
 from zmq_client import Client
+import os
+
+@app.route('/login', methods=['POST'])
+def do_admin_login():
+    if request.form['password'] == 'password':
+        session['logged_in'] = True
+    else:
+        flash('wrong password!')
+    return my_form()
+
+@app.route("/logout", methods=['POST'])
+def logout():
+    session['logged_in'] = False
+    return my_form()
 
 @app.route('/')
 def my_form():
-    return render_template('my-form.html')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('my-form.html')
 
 @app.route('/password', methods=['GET','POST'])
 def password():
@@ -436,9 +454,10 @@ def set_interlock():
             data = [0]
         return jsonify(array = data)
 
-
 if __name__ == "__main__":
+    app.secret_key = os.urandom(12)
     ColdJig = Client("127.0.0.1", "5556")
     ITSDAQ = Client("127.0.0.1", "5555")
     #Master = Client("127.0.0.1", "5556")
-    app.run(host = '127.0.0.1',port = 5000,debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=True)
+

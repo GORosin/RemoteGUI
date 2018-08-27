@@ -15,12 +15,6 @@
 <body>
     <form id = "myform" method="post" role="form">
         <div class="grid-container">
-            <div id="overlay">
-                <div id = "pass">
-                    Password: <input type="password" name = "passwrd" value = "" class = "psw"><br>
-                    <button type="button" name = "passwrd" id = "password">Submit Password</button>
-                </div>
-            </div>
             <div class="grid-item">
                 Low Voltage<br>
                 Power:
@@ -105,7 +99,9 @@
                 <input type="number" name = "user before" value = ""> to <input type="number" name = "user after" value = ""><br/>
                 <button type = "button" id = "Set Interlock">Set Interlock</button><br>
             </div>
-            <span id="myspan"> </span>
+            <input type="hidden" name = "logout" value="">
+            <button type="button" id = "logout">Log Out</button>
+            <span id="myspan"> </span><br>
         </div>
     </form>
 </body>
