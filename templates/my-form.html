@@ -57,12 +57,15 @@
                 <input type = "text" class = "address" name = "IP" value = "">
                 <button type="button" id = "SetPing">Ping</button><br>
                 <button type = "button" id = "Break">Break</button><br>
-                Sensor:
+                Environmental Sensors:
                 <input type="hidden" name = "power3" value="Off" id = "sensor">
                 <input type="button" name = "power3" value="Off" id="onoff3" onclick="onOff('onoff3','sensor')"><br/>
-                <!--<input type = "radio" name = "sensor" value="on"> On<br>
-                <input type = "radio" name = "sensor" value="off"> Off<br>
-                <button type = "button" id = "Sensor">Read Back</button><br>-->
+                Module Sensors:
+                <input type="hidden" name = "power4" value="Off" id = "modulesensor">
+                <input type="button" name = "power4" value="Off" id="onoff4" onclick="onOff('onoff4','modulesensor')"><br/>
+                Power On Module
+                <input type="hidden" name = "power5" value="Off" id = "powersensor">
+                <input type="button" name = "power5" value="Off" id="onoff5" onclick="onOff('onoff5','powersensor')"><br/>
             </div>
             <div class="grid-item">
                 ITSDAQ<br>

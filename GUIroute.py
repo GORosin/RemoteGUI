@@ -366,6 +366,38 @@ def sensor_data():
             data = [0]
         return jsonify(array = data)
 
+@app.route('/modulesensor', methods=['GET','POST'])
+def module_sensor_data():
+    if request.method == 'POST':
+        sensor = request.form['power4']
+        reply = ""
+        data = []
+        try:
+            if sensor == "On":
+                reply = ITSDAQ.SendServerMessage("module sensors on")
+            elif sensor == "Off":
+                reply = ITSDAQ.SendServerMessage("module sensors off")
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
+
+@app.route('/powersensor', methods=['GET','POST'])
+def power_sensor_data():
+    if request.method == 'POST':
+        sensor = request.form['power5']
+        reply = ""
+        data = []
+        try:
+            if sensor == "On":
+                reply = ITSDAQ.SendServerMessage("power on")
+            elif sensor == "Off":
+                reply = ITSDAQ.SendServerMessage("power off")
+            data = [1]
+        except IOError:
+            data = [0]
+        return jsonify(array = data)
+
 @app.route('/break', methods=['GET','POST'])
 def break_connection():
     data = []
