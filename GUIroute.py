@@ -45,9 +45,9 @@ def set_channel1():
 def read_channel1():
     data = []
     try:
-        volt = ColdJig.SendServerMessage("lowv,voltage,get, channel 1")
+        volt = ColdJig.SendServerMessage("lowv,voltage,get,channel 1")
         print(volt)
-        current = ColdJig.SendServerMessage("lowv,current,get, channel 1")
+        current = ColdJig.SendServerMessage("lowv,current,get,channel 1")
         data = [1,volt, current,1]
     except IOError:
         data = [0]
@@ -156,7 +156,7 @@ def set_channel6():
     print(volts)
     data = []
     try:
-        reply = ColdJig.SendServerMessage("highV, voltage, "+volts)
+        reply = ColdJig.SendServerMessage("highV,voltage,set, "+volts)
         data = [1]
     except IOError:
         data = [0]
@@ -439,9 +439,10 @@ def run_test():
     if request.method == 'POST':
         tests = request.form.getlist("tests")
         print(tests)
+        message="run_test "+" ".join([str(bl) for bl in tests])
         data = []
         try:
-            ITSDAQ.SendServerMessage(tests)
+            ITSDAQ.SendServerMessage(message)
             data = [1]
         except IOError:
             data = [0]
@@ -480,5 +481,5 @@ if __name__ == "__main__":
     ColdJig = Client("127.0.0.1", "5556")
     ITSDAQ = Client("127.0.0.1", "5555")
     #Master = Client("127.0.0.1", "5556")
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='10.2.244.193', port=5000, debug=True)
 
