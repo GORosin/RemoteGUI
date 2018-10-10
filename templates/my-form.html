@@ -10,6 +10,7 @@
     <link type="text/css" rel="stylesheet" href="static/css/style.css">
     <script src="static/js/jquery-1.9.0.js"></script>
     <script src="static/js/myscript.js"></script>
+    <script src="static/js/plotly.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -102,6 +103,31 @@
                 <input type="number" name = "user before" value = ""> to <input type="number" name = "user after" value = ""><br/>
                 <button type = "button" id = "Set Interlock">Set Interlock</button><br>
             </div>
+             <div class="grid-item">
+               <div id="chart"></div>
+               <script>
+                 function getData() {
+                 return Math.random();
+                 }  
+                 Plotly.plot('chart',[{
+                 y:[getData()],
+                 type:'line'
+                 }]);
+                 
+                 var cnt = 0;
+                 setInterval(function(){
+                 Plotly.extendTraces('chart',{ y:[[getData()]]}, [0]);
+                 cnt++;
+                 if(cnt > 500) {
+                 Plotly.relayout('chart',{
+                 xaxis: {
+                 range: [cnt-500,cnt]
+                 }
+                 });
+                 }
+                 },15);
+        </script>
+    </div>
             <a href="/logout">Logout</a>
             <span id="myspan"> </span><br>
         </div>
