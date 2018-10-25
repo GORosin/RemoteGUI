@@ -5,6 +5,7 @@ app = Flask(__name__)
 from zmq_client import Client
 import os
 
+
 @app.route('/login', methods=['POST'])
 def do_admin_login():
     pswd = request.form['password'].encode('utf-8')

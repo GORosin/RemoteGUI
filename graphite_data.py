@@ -2,7 +2,7 @@ import requests
 import json
 from datetime import datetime
 
-def help():
+def help_info():
     print("use of get data: get_data(server address, metric name, start time,end time,port")
     print("returns list of all none null data in that timeframe")
     print("time formats:")
