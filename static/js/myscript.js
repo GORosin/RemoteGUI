@@ -206,7 +206,7 @@ $(function() {
             changeText("myspan", array_data[0]);
         })
     });
-    $(document.getElementById("Run Confirmation Test")).click(function() {
+    $(document.getElementById("Start Thermal Cycle")).click(function() { //deprecated
         var request = $.ajax({
             url: '/confirmtest',
             data: $('form').serialize(),

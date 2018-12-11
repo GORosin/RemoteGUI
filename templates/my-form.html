@@ -72,9 +72,11 @@
                 ITSDAQ<br>
                 <input type="hidden" name = "standard" value="run" id = "standard">
                 <button type="button" name = "standard" id="standardtest"> Start Standard Tests </button> <br/>
-                Temperature for Test<br>
+                Upper Temperature:
                 <input type="number" name = "test" value = ""><br/>
-                <button type = "button" id = "Run Confirmation Test">Run Confirmation Test</button><br>
+                Lower Temperature:
+                <input type="number" name = "test" value = ""><br/>
+                <button type = "button" id = "Start Thermal Cycle"> Start Thermal Cycle</button><br>
                 <input type="checkbox" name="tests" id = "test1" value="true" onclick="check('test1','htest1')"> Strobe Delay<br>
                 <input type="hidden" name="tests" id = "htest1" value="false">
                 <input type="checkbox" name="tests" id = "test2" value="true" onclick="check('test2','htest2')"> Three Point Gain<br>
@@ -89,7 +91,8 @@
                 <input type="hidden" name="tests" id = "htest6" value="false">
                 <input type="checkbox" name="tests" id = "test7" value="true" onclick="check('test7','htest7')"> Noise Occupancy <br>
                 <input type="hidden" name="tests" id = "htest7" value="false">
-                <button type = "button" id = "Run Tests"> Run Tests </button><br>
+                <button type = "button" id = "Run Tests"> Run Tests </button> <br>
+
             </div>
             <div class="grid-item">
                 Interlock Settings<br>
