@@ -2,7 +2,7 @@ import requests
 import json
 from datetime import datetime
 
-def help_info():
+def help():
     print("use of get data: get_data(server address, metric name, start time,end time,port")
     print("returns list of all none null data in that timeframe")
     print("time formats:")
@@ -14,12 +14,17 @@ def help_info():
 def unix_to_date(unix_time):
     str(datetime.fromtimestamp(int(unix_time)))
     
-def get_data(server_address,metric,start_time='-10min',end_time='now',port='8080'):
+def get_data_time(server_address,metric,start_time='-5s',end_time='now',port='8080'):
     request_format='http://'+server_address +":"+port+"/render?target="+metric+"&from="+start_time+"&until="+end_time+"&format=json"
     response=requests.get(request_format)
     json_data=response.json()[0]['datapoints']
     data_points=[[unix_to_date(point[1]):point[0]] for point in json_data if point[0] != None]
     return data_points
+
+def get_last_data():
+    points=get_data_time('127.0.0.1','QCBox.ThermalCycle')
+    return points[-1][-1]
+
 
     
     
