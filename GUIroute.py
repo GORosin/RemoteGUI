@@ -4,7 +4,7 @@ import  hashlib
 app = Flask(__name__)
 from zmq_client import Client
 import os
-
+import socket
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
@@ -329,7 +329,7 @@ def temperature():
 @app.route('/readtemp', methods=['GET','POST'])
 def read_temp():
     if request.method == 'POST':
-        message = "chiller, get"
+        message = "chiller,get,GetTemperature"
         data = []
         try:
             reply = ColdJig.SendServerMessage(message)
@@ -477,10 +477,16 @@ def set_interlock():
             data = [0]
         return jsonify(array = data)
 
+def get_host():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    host=s.getsockname()[0]
+    s.close()
+    return host
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
-    ColdJig = Client("127.0.0.1", "5556")
-    ITSDAQ = Client("127.0.0.1", "5555")
+    ColdJig = Client("10.2.242.125", "5556")
+    ITSDAQ = Client("127.0.0.1", "5554")
     #Master = Client("127.0.0.1", "5556")
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host=get_host(), port=5000, debug=True)
 
