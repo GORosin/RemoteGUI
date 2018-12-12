@@ -416,7 +416,7 @@ def start_thermal_cycle():
         upper = request.form['upper']
         lower = request.form['lower']
         tests = request.form.getlist("tests")
-        print("something")
+        print(upper,lower,tests)
     return jsonify(array = data)
 
 @app.route('/standardtest', methods=['GET','POST'])
@@ -430,7 +430,7 @@ def standard_test():
         except IOError:
             data = [0]
         print(result)
-        return jsonify(array = data)
+    return jsonify(array = data)
 
 @app.route('/interlock', methods=['GET','POST'])
 def set_interlock():
