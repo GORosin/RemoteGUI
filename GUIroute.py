@@ -409,18 +409,15 @@ def break_connection():
         data = [0]
     return jsonify(array = data)
 
-@app.route('/confirmtest', methods=['GET','POST'])
-def confirmation_test():
+@app.route('/startthermalcycle', methods=['GET','POST'])
+def start_thermal_cycle():
     if request.method == 'POST':
-        result = request.form['test']
         data = []
-        try:
-            Master.SendServerMessage("start test at: "+result)
-            data = [1]
-        except IOError:
-            data = [0]
-        print(result)
-        return jsonify(array = data)
+        upper = request.form['upper']
+        lower = request.form['lower']
+        tests = request.form.getlist("tests")
+        print("something")
+    return jsonify(array = data)
 
 @app.route('/standardtest', methods=['GET','POST'])
 def standard_test():
@@ -433,20 +430,6 @@ def standard_test():
         except IOError:
             data = [0]
         print(result)
-        return jsonify(array = data)
-
-@app.route('/runtests', methods=['GET','POST'])
-def run_test():
-    if request.method == 'POST':
-        tests = request.form.getlist("tests")
-        print(tests)
-        message="run_test "+" ".join([str(bl) for bl in tests])
-        data = []
-        try:
-            ITSDAQ.SendServerMessage(message)
-            data = [1]
-        except IOError:
-            data = [0]
         return jsonify(array = data)
 
 @app.route('/interlock', methods=['GET','POST'])

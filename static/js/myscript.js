@@ -206,9 +206,9 @@ $(function() {
             changeText("myspan", array_data[0]);
         })
     });
-    $(document.getElementById("Start Thermal Cycle")).click(function() { //deprecated
+    $(document.getElementById("Start Thermal Cycle")).click(function() {
         var request = $.ajax({
-            url: '/confirmtest',
+            url: '/startthermalcycle',
             data: $('form').serialize(),
             type: 'POST',
             dataType: "html"
