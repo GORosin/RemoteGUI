@@ -25,6 +25,7 @@ $(function() {
         })
     });
     $(document.getElementById("onoff")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/low',
             data: $('form').serialize(),
@@ -281,9 +282,15 @@ function noReload(){
 function changeText(text, num){
     if(num == 1){
         document.getElementById(text).innerHTML = "Replied";
+        document.getElementById(text).style.backgroundColor = "#21c404";
+    }
+    else if (num == 2){
+        document.getElementById(text).innerHTML = "Loading...";
+        document.getElementById(text).style.backgroundColor = "#8f8e8d";
     }
     else{
         document.getElementById(text).innerHTML = "Server not responding";
+        document.getElementById(text).style.backgroundColor = "#c71700";
     }
 }
 
