@@ -39,6 +39,7 @@ $(function() {
         })
     });
     $(document.getElementById("onoff2")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/high',
             data: $('form').serialize(),
@@ -52,6 +53,7 @@ $(function() {
         })
     });
     $(document.getElementById("channel 1")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/channel1',
             data: $('form').serialize(),
@@ -65,6 +67,7 @@ $(function() {
         })
     });
     $(document.getElementById("read channel 1")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/readchannel1',
             data: $('form').serialize(),
@@ -78,6 +81,7 @@ $(function() {
         })
     });
     $(document.getElementById("channel 6")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/channel6',
             data: $('form').serialize(),
@@ -91,6 +95,7 @@ $(function() {
         })
     });
     $(document.getElementById("read channel 6")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/readchannel6',
             data: $('form').serialize(),
@@ -130,6 +135,7 @@ $(function() {
         })
     });
     $(document.getElementById("SetPing")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/ping',
             data: $('form').serialize(),
@@ -143,6 +149,7 @@ $(function() {
         })
     });
     $(document.getElementById("Break")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/break',
             data: $('form').serialize(),
@@ -156,6 +163,7 @@ $(function() {
         })
     });
     $(document.getElementById("IV scan")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/IVscan',
             data: $('form').serialize(),
@@ -169,6 +177,7 @@ $(function() {
         })
     });
     $(document.getElementById("onoff3")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/sensor',
             data: $('form').serialize(),
@@ -182,6 +191,7 @@ $(function() {
         })
     });
     $(document.getElementById("onoff4")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/modulesensor',
             data: $('form').serialize(),
@@ -195,6 +205,7 @@ $(function() {
         })
     });
     $(document.getElementById("onoff5")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/powersensor',
             data: $('form').serialize(),
@@ -208,6 +219,7 @@ $(function() {
         })
     });
     $(document.getElementById("Start Thermal Cycle")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/startthermalcycle',
             data: $('form').serialize(),
@@ -221,6 +233,7 @@ $(function() {
         })
     });
     $(document.getElementById("Run Tests")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/runtests',
             data: $('form').serialize(),
@@ -234,6 +247,7 @@ $(function() {
         })
     });
     $(document.getElementById("standardtest")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/standardtest',
             data: $('form').serialize(),
@@ -247,6 +261,7 @@ $(function() {
         })
     });
     $(document.getElementById("Set Interlock")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/interlock',
             data: $('form').serialize(),
@@ -260,6 +275,7 @@ $(function() {
         })
     });
     $(document.getElementById("itstart")).click(function() {
+        changeText("myspan", 2);
         var request = $.ajax({
             url: '/itsdaqsession',
             data: $('form').serialize(),
@@ -272,7 +288,6 @@ $(function() {
             changeText("myspan", array_data[0]);
         })
     });
-
 });
 
 
@@ -307,7 +322,7 @@ function noReload(){
 
 function changeText(text, num){
     if(num == 1){
-        document.getElementById(text).innerHTML = "Replied";
+        document.getElementById(text).innerHTML = "Ready";
         document.getElementById(text).style.backgroundColor = "#21c404";
     }
     else if (num == 2){
