@@ -280,7 +280,9 @@ def low_voltage():
         try:
             if result == "On":
                 reply = ColdJig.SendServerMessage("lowV,turn,on")
+                time.sleep(60)
             elif result == "Off":
+                time.sleep(60)
                 reply = ColdJig.SendServerMessage("lowV,turn,off")
             data = [1]
         except IOError:

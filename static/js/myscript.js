@@ -259,6 +259,20 @@ $(function() {
             changeText("myspan", array_data[0]);
         })
     });
+    $(document.getElementById("itstart")).click(function() {
+        var request = $.ajax({
+            url: '/itsdaqsession',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "html"
+        });
+        request.done(function(JSON_array){
+            array_data = JSON.parse(JSON_array)["array"];
+            console.log("started itsdaq session");
+            changeText("myspan", array_data[0]);
+        })
+    });
+
 });
 
 
@@ -272,6 +286,18 @@ function onOff(buttonid,inputid){
         document.getElementById(inputid).value="Off";
     }
 }
+
+function justOn(buttonid,inputid){
+    currentvalue = document.getElementById(buttonid).value;
+    console.log("called justON");
+    if(currentvalue == "Off"){
+        console.log("changin value");
+        document.getElementById(buttonid).value="On";
+        document.getElementById(inputid).value="On";
+    }
+}
+
+
 
 function noReload(){
 	if(event.key == 'Enter'){

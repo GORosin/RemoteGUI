@@ -41,7 +41,7 @@
                 <input type="number" id="member2" value="1" onkeydown = "addFields2(event)" min = "1" max = "5"> Channel(s) <br />
                     Channel 1
                     <input type="number" id = "high" name = "channel6" value="0" min = "-10000" max = "10000" step = "5">
-                    <button type="button" id = "channel 6" onclick="verify('high')">Set Voltage</button>
+                    <button type="button" id = "channel 6" onclick="verify('high'); justOn('onoff2','highpower')">Set Voltage</button>
                     <button type="button" id = "read channel 6">Read Back</button><br/>
                     <div id="container2"></div>
                     <span id="highspan"> </span>
@@ -67,6 +67,10 @@
                 Power On Module
                 <input type="hidden" name = "power5" value="Off" id = "powersensor">
                 <input type="button" name = "power5" value="Off" id="onoff5" onclick="onOff('onoff5','powersensor')"><br/>
+		ITSDAQ Session
+                <input type="hidden" name = "itsdaq" value="start itsdaq" id = "itsdaqsession">
+                <input type="button" style="width:auto" name = "itsdaq" value="start itsdaq"  id="itstart"></button><br/>
+
                 <div id="myspan">  </div>
             </div>
             <div class="grid-item">

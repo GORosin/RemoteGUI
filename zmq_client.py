@@ -21,7 +21,7 @@ class Client:
         poller = zmq.Poller()
         reply=''
         poller.register(socket, zmq.POLLIN)
-        if poller.poll(10*1000): # 10s timeout in milliseconds
+        if poller.poll(500*1000): # 10s timeout in milliseconds
             reply = socket.recv()
         else:
             raise IOError("Timeout, server not responding")
